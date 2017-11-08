@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import TournamentList from './modules/tournaments/tournament_list'
+import TournamentList from './components/tournament_list'
 
 class App extends Component {
   render() {

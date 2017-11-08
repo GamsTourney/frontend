@@ -11,8 +11,17 @@ class TournamentList extends PureComponent {
     this.props.tournamentActions.fetchTournaments()
   }
 
+  // TODO: API should return ID to use as key
   renderData() {
-    return <div>{this.props.tournaments.toString()}</div>
+    return (
+      <ul>
+        {
+          this.props.tournaments.map((t) =>
+            <li key={t.url}>{t.name}</li>
+          )
+        }
+      </ul>
+    )
   }
 
   render() {
