@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { PureComponent } from 'react'
-import * as tournamentActions from '../../actions/tournamentActions'
+import * as tournamentActions from '../actions/tournamentActions'
 import PropTypes from 'prop-types'
 import React from 'react'
 
