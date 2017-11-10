@@ -1,9 +1,8 @@
+import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { PureComponent } from 'react'
-import * as tournamentActions from '../actions/tournamentActions'
-import PropTypes from 'prop-types'
-import React from 'react'
+import * as tournamentActions from '../actions'
 
 class TournamentList extends PureComponent {
 
@@ -11,13 +10,12 @@ class TournamentList extends PureComponent {
     this.props.tournamentActions.fetchTournaments()
   }
 
-  // TODO: API should return ID to use as key
   renderData() {
     return (
       <ul>
         {
           this.props.tournaments.map((t) =>
-            <li key={t.url}>{t.name}</li>
+            <li key={t.id}>{t.name}</li>
           )
         }
       </ul>

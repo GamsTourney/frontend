@@ -1,11 +1,9 @@
-import * as types from './apiActions'
+import * as api from 'actions/api'
 
-// TODO: Use environments
-const api_url = 'http://localhost:4000'
-const tournaments_url = `${api_url}/tournaments`
+const tournaments_url = `${api.API_URL}/tournaments`
 
 export function receiveTournaments(json) {
-  return { type: types.API_RECIEVE, tournaments: json }
+  return { type: api.API_RECIEVE, tournaments: json }
 }
 
 export function fetchTournaments() {
