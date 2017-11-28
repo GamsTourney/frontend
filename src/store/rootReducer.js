@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import tournaments from './tournamentReducer'
+import tournaments from 'modules/tournaments/dux'
 
 const rootReducer = combineReducers({
   tournaments

@@ -1,5 +1,5 @@
-import initialState from './initialState'
-import { API_FETCH, API_RECIEVE } from '../actions/apiActions'
+import initialState from 'store/initial'
+import { API_FETCH, API_RECIEVE } from 'actions/api'
 
 export default function tournament(state = initialState.tournaments, action) {
   let newState
