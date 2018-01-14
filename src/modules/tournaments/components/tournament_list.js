@@ -11,10 +11,12 @@ class TournamentList extends PureComponent {
   }
 
   renderData() {
+    const { tournaments } = this.props
+
     return (
       <ul>
         {
-          this.props.tournaments.map((t) =>
+          tournaments.map((t) =>
             <li key={t.id}>{t.name}</li>
           )
         }
@@ -23,27 +25,35 @@ class TournamentList extends PureComponent {
   }
 
   render() {
+    const { tournaments } = this.props
+
     return (
       <div className="">
-          {this.props.tournaments.length > 0 ?
-            this.renderData() :
-            <div className="">
-              No Data
-            </div>
-          }
+        { tournaments.length > 0 ?
+          this.renderData() :
+          <div className="">
+            No Data
+          </div>
+        }
       </div>
     )
   }
 }
 
 TournamentList.propTypes = {
-  tournamentActions: PropTypes.object,
+  actions: PropTypes.object.isRequired,
   tournaments: PropTypes.array
 }
 
+TournamentList.defaultProps = {
+  tournaments: []
+}
+
 function mapStateToProps(state) {
+  const { tournaments } = state
+
   return {
-    tournaments: state.tournaments
+    tournaments
   }
 }
 
