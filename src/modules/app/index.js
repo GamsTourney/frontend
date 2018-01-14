@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './style.css'
+import './style.scss'
 import TournamentList from 'modules/tournaments'
 
 class App extends Component {
