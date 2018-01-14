@@ -2,12 +2,12 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as tournamentActions from '../actions'
+import { fetchTournaments } from "../actions"
 
 class TournamentList extends PureComponent {
 
   componentWillMount() {
-    this.props.tournamentActions.fetchTournaments()
+    this.props.actions.fetchTournaments()
   }
 
   renderData() {
@@ -49,7 +49,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    tournamentActions: bindActionCreators(tournamentActions, dispatch)
+    actions: bindActionCreators({
+      fetchTournaments
+    }, dispatch)
   }
 }
 

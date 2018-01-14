@@ -1,16 +1,20 @@
-import * as api from 'actions/api'
+import { API_RECEIVE, API_URL } from "../../actions/api"
 
-const tournaments_url = `${api.API_URL}/tournaments`
+const tournaments_url = `${API_URL}/tournaments`
 
-export function receiveTournaments(json) {
-  return { type: api.API_RECIEVE, tournaments: json }
+function receiveTournaments(json) {
+  return { type: API_RECEIVE, tournaments: json }
 }
 
-export function fetchTournaments() {
+function fetchTournaments() {
   return dispatch => {
     return fetch(tournaments_url, { method: 'GET' })
     .then(resp => resp.json())
     .then(json => dispatch(receiveTournaments(json)))
   }
 
+}
+
+export {
+  fetchTournaments
 }
