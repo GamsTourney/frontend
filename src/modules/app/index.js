@@ -1,16 +1,28 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Provider } from 'react-redux'
+import { ConnectedRouter } from 'react-router-redux'
+
+import routes from 'routes'
+import { getHistory } from 'routes/history'
 import './style.scss'
-import PlayerList from 'modules/players'
 
 class App extends Component {
   render() {
+    const { store } = this.props
+
     return (
-      <div>
-        <h1>Player List</h1>
-        <PlayerList />
-      </div>
+      <Provider store={store}>
+        <ConnectedRouter history={getHistory()}>
+          <div>{routes}</div>
+        </ConnectedRouter>
+      </Provider>
     )
   }
+}
+
+App.propTypes = {
+  store: PropTypes.object.isRequired
 }
 
 export default App
