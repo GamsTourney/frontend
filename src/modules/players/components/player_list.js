@@ -2,11 +2,14 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchPlayers } from "../actions"
+import { values } from 'lodash/object'
+
+import { fetchPlayers } from '../actions'
+
 
 class PlayerList extends PureComponent {
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.actions.fetchPlayers()
   }
 
@@ -50,10 +53,8 @@ PlayerList.defaultProps = {
 }
 
 function mapStateToProps(state) {
-  const { players } = state
-
   return {
-    players
+    players: values(state.players)
   }
 }
 

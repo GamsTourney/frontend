@@ -1,4 +1,4 @@
 export default {
-  tournaments: [],
-  players: []
+  tournaments: {},
+  players: {}
 }

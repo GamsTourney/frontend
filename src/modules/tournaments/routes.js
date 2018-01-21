@@ -1,4 +1,4 @@
-import TournamentList from './index'
+import TournamentList from './views/index'
 
 const root = '/tournaments'
 export default {

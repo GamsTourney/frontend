@@ -1,20 +1,14 @@
-import { API_RECEIVE, API_URL } from "../../actions/api"
-
-const players_url = `${API_URL}/players`
-
-function receivePlayers(json) {
-  return { type: API_RECEIVE, players: json }
-}
+import { request } from "../../actions/api"
 
 function fetchPlayers() {
-  return dispatch => {
-    return fetch(players_url, { method: 'GET' })
-    .then(resp => resp.json())
-    .then(json => dispatch(receivePlayers(json)))
-  }
+  return request('players', '/players')
+}
 
+function fetchPlayer(id) {
+  return request('players', `/players/${id}`)
 }
 
 export {
+  fetchPlayer,
   fetchPlayers
 }

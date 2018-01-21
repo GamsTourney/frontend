@@ -2,7 +2,9 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchTournaments } from "../actions"
+import { values } from 'lodash/object'
+
+import { fetchTournaments } from '../actions'
 
 class TournamentList extends PureComponent {
 
@@ -50,10 +52,8 @@ TournamentList.defaultProps = {
 }
 
 function mapStateToProps(state) {
-  const { tournaments } = state
-
   return {
-    tournaments
+    tournaments: values(state.tournaments)
   }
 }
 
