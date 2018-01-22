@@ -5,7 +5,12 @@ import { ConnectedRouter } from 'react-router-redux'
 
 import routes from 'routes'
 import { getHistory } from 'routes/history'
+import Navigation from './navigation'
 import './style.scss'
+
+const stylesheets = [
+  "https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"
+]
 
 class App extends Component {
   render() {
@@ -14,7 +19,13 @@ class App extends Component {
     return (
       <Provider store={store}>
         <ConnectedRouter history={getHistory()}>
-          <div>{routes}</div>
+          <div>
+            {stylesheets.map((s) => <link key={s} rel='stylesheet' href={s} />)}
+            <Navigation />
+            <div className='content'>
+              {routes}
+            </div>
+          </div>
         </ConnectedRouter>
       </Provider>
     )

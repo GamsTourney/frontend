@@ -10,9 +10,12 @@ function buildApiReducer(collection) {
       case API_FETCH:
         return action
       case API_RECEIVE:
-        const data = Array.isArray(action[collection]) ? action[collection] : [action[collection]]
-        newState = merge(keyBy(data, 'id'), state)
-        return newState
+        if (action[collection]) {
+          const data = Array.isArray(action[collection]) ? action[collection] : [action[collection]]
+          newState = merge(keyBy(data, 'id'), state)
+          return newState
+        }
+        return state
       default:
         return state
     }
