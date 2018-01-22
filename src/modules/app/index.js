@@ -22,7 +22,7 @@ class App extends Component {
           <div>
             {stylesheets.map((s) => <link key={s} rel='stylesheet' href={s} />)}
             <Navigation />
-            <div className='content'>
+            <div className='container'>
               {routes}
             </div>
           </div>

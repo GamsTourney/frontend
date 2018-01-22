@@ -2,8 +2,11 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchPlayer } from '../actions'
 import { get } from 'lodash/object'
+
+import { Grid, Row, Col, Panel } from 'react-bootstrap'
+
+import { fetchPlayer } from '../actions'
 
 class PlayerDetail extends PureComponent {
 
@@ -18,7 +21,32 @@ class PlayerDetail extends PureComponent {
       return null
     }
 
-    return <div>{player.name}</div>
+    return (
+      <Grid>
+        <Row>
+          <Col xs={4}>
+            <Panel>
+              <Panel.Heading>{player.name} Details</Panel.Heading>
+              <Panel.Body>User info goes here</Panel.Body>
+            </Panel>
+          </Col>
+          <Col xs={8}>
+            <Panel>
+              <Panel.Heading>Stats</Panel.Heading>
+              <Panel.Body>STATS HERE</Panel.Body>
+            </Panel>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <Panel>
+              <Panel.Heading>Charts and Shit</Panel.Heading>
+              <Panel.Body>Charts</Panel.Body>
+            </Panel>
+          </Col>
+        </Row>
+      </Grid>
+    )
   }
 }
 

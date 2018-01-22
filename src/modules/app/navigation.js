@@ -9,7 +9,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 class Navigation extends Component {
   render() {
     return (
-      <Navbar>
+      <Navbar inverse>
         <Navbar.Header>
           <Navbar.Brand>
             <a>Gams</a>
