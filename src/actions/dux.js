@@ -3,6 +3,18 @@ import { API_FETCH, API_RECEIVE } from 'actions/api'
 import { merge } from 'lodash/object'
 import { keyBy } from 'lodash/collection'
 
+function extractData(data) {
+  const objects = Array.isArray(data) ? data : [data]
+  const extracted = objects.map((obj) => {
+    Object.keys(obj.included).forEach((include) => {
+      obj[include] = obj.included[include]
+    })
+    delete obj.included
+    return obj
+  })
+  return keyBy(extracted, 'id')
+}
+
 function buildApiReducer(collection) {
   return (state = initialState[collection], action) => {
     let newState
@@ -11,8 +23,7 @@ function buildApiReducer(collection) {
         return action
       case API_RECEIVE:
         if (action[collection]) {
-          const data = Array.isArray(action[collection]) ? action[collection] : [action[collection]]
-          newState = merge(keyBy(data, 'id'), state)
+          newState = merge(extractData(action[collection]), state)
           return newState
         }
         return state
