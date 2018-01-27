@@ -3,10 +3,10 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/object'
-
 import { Grid, Row, Col, Panel } from 'react-bootstrap'
 
 import { fetchPlayer } from '../actions'
+import PlayerAvatar from './player_avatar'
 
 class PlayerDetail extends PureComponent {
 
@@ -27,6 +27,11 @@ class PlayerDetail extends PureComponent {
           <Col xs={4}>
             <Panel>
               <Panel.Heading>{player.name} Details</Panel.Heading>
+              <PlayerAvatar
+                className='player-avatar'
+                player={player}
+                rounded
+              />
               <Panel.Body>User info goes here</Panel.Body>
             </Panel>
           </Col>

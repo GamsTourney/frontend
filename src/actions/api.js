@@ -12,8 +12,8 @@ function request(collection, url, method = 'GET') {
       .then(resp => resp.json())
       .then(json => dispatch(apiRecieve(collection, json)))
   }
-
 }
+
 export {
   API_URL,
   API_FETCH,

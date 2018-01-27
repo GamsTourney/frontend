@@ -1,7 +1,7 @@
 import { request } from "../../actions/api"
 
 function fetchPlayers() {
-  return request('players', '/players')
+  return request('players', '/players?include=matches')
 }
 
 function fetchPlayer(id) {
