@@ -31,7 +31,7 @@ class PlayerList extends PureComponent {
     const { players } = this.props
 
     return (
-      <div className="">
+      <div>
         { players.length > 0 ?
           this.renderData() :
           <div className="">

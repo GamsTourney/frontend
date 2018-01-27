@@ -6,10 +6,9 @@ import { ConnectedRouter } from 'react-router-redux'
 import routes from 'routes'
 import { getHistory } from 'routes/history'
 import Navigation from './navigation'
-import './style.css'
 
 const stylesheets = [
-  "https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"
+  "https://bootswatch.com/3/paper/bootstrap.min.css"
 ]
 
 class App extends Component {

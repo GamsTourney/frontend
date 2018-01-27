@@ -25,7 +25,7 @@ class PlayerDetail extends PureComponent {
       <Grid>
         <Row>
           <Col xs={4}>
-            <Panel>
+            <Panel bsStyle="primary">
               <Panel.Heading>{player.name} Details</Panel.Heading>
               <PlayerAvatar
                 className='player-avatar'
@@ -36,7 +36,7 @@ class PlayerDetail extends PureComponent {
             </Panel>
           </Col>
           <Col xs={8}>
-            <Panel>
+            <Panel bsStyle="primary">
               <Panel.Heading>Stats</Panel.Heading>
               <Panel.Body>STATS HERE</Panel.Body>
             </Panel>
@@ -44,7 +44,7 @@ class PlayerDetail extends PureComponent {
         </Row>
         <Row>
           <Col xs={12}>
-            <Panel>
+            <Panel bsStyle="primary">
               <Panel.Heading>Charts and Shit</Panel.Heading>
               <Panel.Body>Charts</Panel.Body>
             </Panel>
