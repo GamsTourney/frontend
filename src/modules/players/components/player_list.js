@@ -4,21 +4,22 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { values } from 'lodash/object'
 
-import { fetchTournaments } from '../actions'
+import { fetchPlayers } from '../actions'
 
-class TournamentList extends PureComponent {
 
-  componentWillMount() {
-    this.props.actions.fetchTournaments()
+class PlayerList extends PureComponent {
+
+  componentDidMount() {
+    this.props.actions.fetchPlayers()
   }
 
   renderData() {
-    const { tournaments } = this.props
+    const { players } = this.props
 
     return (
       <ul>
         {
-          tournaments.map((t) =>
+          players.map((t) =>
             <li key={t.id}>{t.name}</li>
           )
         }
@@ -27,11 +28,11 @@ class TournamentList extends PureComponent {
   }
 
   render() {
-    const { tournaments } = this.props
+    const { players } = this.props
 
     return (
-      <div className="">
-        { tournaments.length > 0 ?
+      <div>
+        { players.length > 0 ?
           this.renderData() :
           <div className="">
             No Data
@@ -42,27 +43,27 @@ class TournamentList extends PureComponent {
   }
 }
 
-TournamentList.propTypes = {
+PlayerList.propTypes = {
   actions: PropTypes.object.isRequired,
-  tournaments: PropTypes.array
+  players: PropTypes.array
 }
 
-TournamentList.defaultProps = {
-  tournaments: []
+PlayerList.defaultProps = {
+  players: []
 }
 
 function mapStateToProps(state) {
   return {
-    tournaments: values(state.tournaments)
+    players: values(state.players)
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      fetchTournaments
+      fetchPlayers
     }, dispatch)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TournamentList)
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerList)

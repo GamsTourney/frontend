@@ -1,16 +1,38 @@
 import React, { Component } from 'react'
-import './style.css'
-import TournamentList from 'modules/tournaments'
+import PropTypes from 'prop-types'
+import { Provider } from 'react-redux'
+import { ConnectedRouter } from 'react-router-redux'
+
+import routes from 'routes'
+import { getHistory } from 'routes/history'
+import Navigation from './navigation'
+
+const stylesheets = [
+  "https://bootswatch.com/3/paper/bootstrap.min.css"
+]
 
 class App extends Component {
   render() {
+    const { store } = this.props
+
     return (
-      <div>
-        <h1>Tournament List</h1>
-        <TournamentList />
-      </div>
+      <Provider store={store}>
+        <ConnectedRouter history={getHistory()}>
+          <div>
+            {stylesheets.map((s) => <link key={s} rel='stylesheet' href={s} />)}
+            <Navigation />
+            <div className='container'>
+              {routes}
+            </div>
+          </div>
+        </ConnectedRouter>
+      </Provider>
     )
   }
+}
+
+App.propTypes = {
+  store: PropTypes.object.isRequired
 }
 
 export default App
