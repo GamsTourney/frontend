@@ -4,21 +4,21 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { values } from 'lodash/object'
 
-import { fetchPlayers } from '../actions'
+import { fetchGames } from '../actions'
 
-class PlayerList extends PureComponent {
+class GameDetail extends PureComponent {
 
   componentDidMount() {
-    this.props.actions.fetchPlayers()
+    this.props.actions.fetchGames()
   }
 
   renderData() {
-    const { players } = this.props
+    const { games } = this.props
 
     return (
       <ul>
         {
-          players.map((t) =>
+          games.map((t) =>
             <li key={t.id}>{t.name}</li>
           )
         }
@@ -27,11 +27,11 @@ class PlayerList extends PureComponent {
   }
 
   render() {
-    const { players } = this.props
+    const { games } = this.props
 
     return (
       <div>
-        { players.length > 0 ?
+        { games.length > 0 ?
           this.renderData() :
           <div className="">
             No Data
@@ -42,27 +42,27 @@ class PlayerList extends PureComponent {
   }
 }
 
-PlayerList.propTypes = {
+GameDetail.propTypes = {
   actions: PropTypes.object.isRequired,
-  players: PropTypes.array
+  games: PropTypes.array
 }
 
-PlayerList.defaultProps = {
-  players: []
+GameDetail.defaultProps = {
+  games: []
 }
 
 function mapStateToProps(state) {
   return {
-    players: values(state.players)
+    games: values(state.games)
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      fetchPlayers
+      fetchGames
     }, dispatch)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlayerList)
+export default connect(mapStateToProps, mapDispatchToProps)(GameDetail)

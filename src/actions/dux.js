@@ -6,6 +6,9 @@ import { keyBy } from 'lodash/collection'
 function extractData(data) {
   const objects = Array.isArray(data) ? data : [data]
   const extracted = objects.map((obj) => {
+    if (!obj.included) {
+      return obj
+    }
     Object.keys(obj.included).forEach((include) => {
       obj[include] = obj.included[include]
     })
