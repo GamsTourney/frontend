@@ -1,3 +1,3 @@
-import GameList from '../components/game_list'
+import GameList from '../components/list'
 
 export default GameList

@@ -7,7 +7,7 @@ import { Grid, Row, Col, Panel } from 'react-bootstrap'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
 import { fetchPlayer } from '../actions'
-import PlayerAvatar from './player_avatar'
+import PlayerAvatar from './avatar'
 
 const DemoChart = () => {
   const placeholderData = [

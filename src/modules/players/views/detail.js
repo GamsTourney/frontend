@@ -1,4 +1,4 @@
-import PlayerDetail from '../components/player_detail'
+import PlayerDetail from '../components/detail'
 
 import '../styles.css'
 

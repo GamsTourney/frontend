@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/object'
 
+import GameCard from './card'
 import { fetchGame } from '../actions'
 
 class GameDetail extends PureComponent {
@@ -19,7 +20,7 @@ class GameDetail extends PureComponent {
       return null
     }
 
-    return <div>{game.name}</div>
+    return <GameCard game={game} />
   }
 }
 

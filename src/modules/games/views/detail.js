@@ -1,3 +1,3 @@
-import GameDetail from '../components/game_detail'
+import GameDetail from '../components/detail'
 
 export default GameDetail
