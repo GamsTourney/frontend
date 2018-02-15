@@ -1,0 +1,6 @@
+img.game-avatar {
+  width: 100%;
+  max-width: 300px;
+  cursor: pointer;
+  padding-right: 10px;
+}
