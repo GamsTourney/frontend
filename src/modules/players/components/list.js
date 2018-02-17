@@ -6,7 +6,6 @@ import { values } from 'lodash/object'
 
 import { fetchPlayers } from '../actions'
 
-
 class PlayerList extends PureComponent {
 
   componentDidMount() {

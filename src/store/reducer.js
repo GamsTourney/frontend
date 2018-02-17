@@ -5,7 +5,8 @@ import { buildApiReducer } from 'actions/dux'
 const reducer = combineReducers({
   router,
   tournaments: buildApiReducer('tournaments'),
-  players: buildApiReducer('players')
+  players: buildApiReducer('players'),
+  games: buildApiReducer('games')
 })
 
 export default reducer

@@ -1,3 +1,3 @@
-import PlayerList from '../components/player_list'
+import PlayerList from '../components/list'
 
 export default PlayerList
