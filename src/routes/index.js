@@ -4,6 +4,7 @@ import { Route } from 'react-router'
 import tournamentRoutes from 'modules/tournaments/routes'
 import playerRoutes from 'modules/players/routes'
 import gameRoutes from 'modules/games/routes'
+import matchRoutes from 'modules/matches/routes'
 
 function combineRoutes(routes) {
   return Object.keys(routes).map((route) =>
@@ -19,5 +20,6 @@ function combineRoutes(routes) {
 export default combineRoutes({
   ...tournamentRoutes,
   ...playerRoutes,
-  ...gameRoutes
+  ...gameRoutes,
+  ...matchRoutes
 })

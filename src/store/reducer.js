@@ -6,7 +6,8 @@ const reducer = combineReducers({
   router,
   tournaments: buildApiReducer('tournaments'),
   players: buildApiReducer('players'),
-  games: buildApiReducer('games')
+  games: buildApiReducer('games'),
+  matches: buildApiReducer('matches')
 })
 
 export default reducer
