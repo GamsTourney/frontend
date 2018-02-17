@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import {
-  Navbar,
-  Nav,
-  NavItem
-} from 'react-bootstrap'
+import { Navbar, Nav, NavItem, Image } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 
 class Navigation extends Component {
@@ -11,11 +8,14 @@ class Navigation extends Component {
     return (
       <Navbar>
         <Navbar.Header>
-          <Navbar.Brand>
-            <a>Gams</a>
-          </Navbar.Brand>
+          <Link to='/'>
+            <span className='navbar-left'>
+              <Image src={require('images/controller.png')} />
+            </span>
+            <Navbar.Brand>Gams</Navbar.Brand>
+          </Link>
         </Navbar.Header>
-        <Nav>
+        <Nav className="collapse navbar-collapse">
           <LinkContainer to='/players'>
             <NavItem>Players</NavItem>
           </LinkContainer>
