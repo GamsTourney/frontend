@@ -1,0 +1,10 @@
+.navbar img {
+  position: relative;
+  transform: translateY(65%);
+  padding-right: 8px;
+  height: 28px;
+}
+
+ul.nav a {
+  font-size: 14px;
+}

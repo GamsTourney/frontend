@@ -6,12 +6,18 @@ import { ConnectedRouter } from 'react-router-redux'
 import routes from 'routes'
 import { getHistory } from 'routes/history'
 import Navigation from './navigation'
+import './styles.css'
 
 const stylesheets = [
   "https://bootswatch.com/3/paper/bootstrap.min.css"
 ]
 
 class App extends Component {
+
+  componentDidMount() {
+    document.title = "Gams 2018"
+  }
+
   render() {
     const { store } = this.props
 
