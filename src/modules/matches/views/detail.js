@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/object'
 
-import { fetchPlayer } from '../../players/actions'
 import { fetchMatch } from '../actions'
 
 class MatchDetail extends PureComponent {

@@ -3,4 +3,12 @@ img.game-avatar {
   max-width: 300px;
   cursor: pointer;
   padding-right: 10px;
+  margin-bottom: 6px;
+}
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
 }
