@@ -8,6 +8,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'rec
 
 import { fetchPlayer } from '../actions'
 import PlayerAvatar from '../components/avatar'
+import '../styles.css'
 
 const DemoChart = () => {
   const placeholderData = [

@@ -19,7 +19,7 @@ const GameRow = ({ row }) => (
 
 const GameCards = ({ games, columns = 2 }) => {
   const rows = chunk(games, 2)
-  return rows.map(row => <Row><GameRow row={row}/></Row>)
+  return rows.map((row, idx) => <Row key={idx}><GameRow row={row}/></Row>)
 }
 
 class GameDetail extends PureComponent {
