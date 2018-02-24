@@ -10,10 +10,9 @@ class ScoreCard extends PureComponent {
 
   render() {
     const { player, results } = this.props
-    console.log(this.props)
 
     return (
-      <Panel className='score-card'>
+      <Panel player={player.id} className='score-card'>
         <Row>
           <Col xs={1}>
             <PlayerAvatar

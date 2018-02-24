@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Sortable from 'react-sortablejs'
 import { fetchPlayers } from 'modules/players/actions'
 
 import ScoreCard from '../components/score_card'
@@ -20,16 +21,34 @@ const PlayerCards = ({ matchId, players }) => {
 
 class MatchScore extends PureComponent {
 
+  constructor(props) {
+    super(props)
+    this.onChangeOrder = this.onChangeOrder.bind(this)
+  }
+
   componentDidMount() {
     const { matchId } = this.props
     this.props.actions.fetchMatch(matchId)
     this.props.actions.fetchPlayers()
   }
 
+  onChangeOrder(order, sortable, event) {
+    console.log(order)
+  }
+
   render() {
     const { matchId, players } = this.props
 
-    return <div><PlayerCards matchId={matchId} players={players}/></div>
+    return (
+      <Sortable
+        onChange={this.onChangeOrder}
+        options={{
+          dataIdAttr: 'player'
+        }}
+      >
+        <PlayerCards matchId={matchId} players={players}/>
+      </Sortable>
+    )
   }
 }
 
