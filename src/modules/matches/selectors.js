@@ -1,9 +1,10 @@
 import { createSelector } from 'reselect'
 import { get } from 'lodash/object'
-import { filter } from 'lodash/collection'
+import { filter, find } from 'lodash/collection'
 import { selectMatches, selectPlayers } from 'selectors/collections'
 
-const selectMatchId = (state, props) => get(props, 'match.params.id')
+const selectMatchId = (state, props) => get(props, 'match.params.id') || props.matchId
+const selectPlayerId = (state, props) => get(props, 'player.id')
 
 const selectMatch = createSelector(
   selectMatches,
@@ -23,11 +24,23 @@ const selectMatchPlayers = createSelector(
   selectMatch,
   selectPlayers,
   selectMatchPlayerIds,
-  (match, players, matchPlayers) => filter(players, (player) => matchPlayers.includes(player.id))
+  (match, players, matchPlayers) => filter(players, player => matchPlayers.includes(player.id))
+)
+
+const selectMatchResults = createSelector(
+  selectMatch,
+  (match) => match.results
+)
+
+const selectPlayerResults = createSelector(
+  selectMatchResults,
+  selectPlayerId,
+  (results, playerId) => find(results, result => result.player_id === playerId)
 )
 
 export {
   selectMatchId,
   selectMatch,
-  selectMatchPlayers
+  selectMatchPlayers,
+  selectPlayerResults
 }

@@ -2,14 +2,21 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
 import { fetchPlayers } from 'modules/players/actions'
+
+import ScoreCard from '../components/score_card'
 import { fetchMatch } from '../actions'
 import {
   selectMatchId,
   selectMatch,
   selectMatchPlayers
 } from '../selectors'
+import '../styles.css'
+
+
+const PlayerCards = ({ matchId, players }) => {
+  return players.map(player => <ScoreCard key={player.id} matchId={matchId} player={player} />)
+}
 
 class MatchScore extends PureComponent {
 
@@ -20,9 +27,9 @@ class MatchScore extends PureComponent {
   }
 
   render() {
-    const { matchData } = this.props
+    const { matchId, players } = this.props
 
-    return <div>{matchData.id}</div>
+    return <div><PlayerCards matchId={matchId} players={players}/></div>
   }
 }
 
