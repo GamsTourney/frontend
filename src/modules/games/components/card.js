@@ -3,6 +3,8 @@ import React, { PureComponent } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Col, Row, Panel, Image } from 'react-bootstrap'
 
+import GameScores from './scores'
+
 class GameCard extends PureComponent {
 
   render() {
@@ -20,8 +22,8 @@ class GameCard extends PureComponent {
               </Col>
               <Col xs={12} md={5}>
                 <div>Players: {game.players}</div>
-                <div>Scoring: TODO</div>
                 <div>Description: TODO</div>
+                <div>Scoring: <GameScores game={game} /></div>
               </Col>
             </Row>
           </Panel.Body>

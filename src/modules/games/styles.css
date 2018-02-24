@@ -3,4 +3,9 @@ img.game-avatar {
   max-width: 300px;
   cursor: pointer;
   padding-right: 10px;
+  margin-bottom: 6px;
+}
+
+.score-list {
+  padding-left: 5px;
 }
