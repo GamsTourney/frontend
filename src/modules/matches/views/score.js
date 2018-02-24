@@ -2,43 +2,44 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { get } from 'lodash/object'
 
 import { fetchPlayers } from 'modules/players/actions'
 import { fetchMatch } from '../actions'
+import {
+  selectMatchId,
+  selectMatch,
+  selectMatchPlayers
+} from '../selectors'
 
-class MatchDetail extends PureComponent {
+class MatchScore extends PureComponent {
 
   componentDidMount() {
-    this.props.actions.fetchMatch(this.props.matchId)
+    const { matchId } = this.props
+    this.props.actions.fetchMatch(matchId)
     this.props.actions.fetchPlayers()
   }
 
   render() {
-    const { match } = this.props
+    const { matchData } = this.props
 
-    console.log(this.props)
-
-    return <div>{match.id}</div>
+    return <div>{matchData.id}</div>
   }
 }
 
-MatchDetail.propTypes = {
+MatchScore.propTypes = {
   actions: PropTypes.object.isRequired,
-  match: PropTypes.object
+  matchData: PropTypes.object
 }
 
-MatchDetail.defaultProps = {
-  match: null
+MatchScore.defaultProps = {
+  matchData: null
 }
 
 function mapStateToProps(state, props) {
-  const matchId = Number(get(props, 'match.params.id'))
-
   return {
-    matchId,
-    match: state.matches[matchId] || {},
-    players: state.players
+    matchId: selectMatchId(state, props),
+    matchData: selectMatch(state, props),
+    players: selectMatchPlayers(state, props)
   }
 }
 
@@ -51,4 +52,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MatchDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(MatchScore)
