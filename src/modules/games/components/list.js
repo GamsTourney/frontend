@@ -7,6 +7,7 @@ import { chunk } from 'lodash/array'
 import { Grid, Col, Row } from 'react-bootstrap'
 
 import GameCard from '../components/card'
+import { selectGames } from 'selectors/collections'
 import { fetchGames } from '../actions'
 
 const GameRow = ({ row }) => (
@@ -19,7 +20,7 @@ const GameRow = ({ row }) => (
 
 const GameCards = ({ games, columns = 2 }) => {
   const rows = chunk(games, 2)
-  return rows.map(row => <Row><GameRow row={row}/></Row>)
+  return rows.map((row, idx) => <Row key={idx}><GameRow row={row}/></Row>)
 }
 
 class GameDetail extends PureComponent {
@@ -52,7 +53,7 @@ GameDetail.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    games: values(state.games)
+    games: values(selectGames(state))
   }
 }
 

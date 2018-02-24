@@ -4,20 +4,20 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/object'
 
+import { fetchPlayers } from 'modules/players/actions'
 import { fetchMatch } from '../actions'
 
 class MatchDetail extends PureComponent {
 
   componentDidMount() {
     this.props.actions.fetchMatch(this.props.matchId)
+    this.props.actions.fetchPlayers()
   }
 
   render() {
     const { match } = this.props
 
-    if(!match) {
-      return null
-    }
+    console.log(this.props)
 
     return <div>{match.id}</div>
   }
@@ -37,14 +37,16 @@ function mapStateToProps(state, props) {
 
   return {
     matchId,
-    match: state.matches[matchId]
+    match: state.matches[matchId] || {},
+    players: state.players
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      fetchMatch
+      fetchMatch,
+      fetchPlayers
     }, dispatch)
   }
 }

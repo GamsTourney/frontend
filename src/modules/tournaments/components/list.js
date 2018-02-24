@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { values } from 'lodash/object'
 
+import { selectTournaments } from 'selectors/collections'
 import { fetchTournaments } from '../actions'
 
 class TournamentList extends PureComponent {
@@ -53,7 +54,7 @@ TournamentList.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    tournaments: values(state.tournaments)
+    tournaments: values(selectTournaments(state))
   }
 }
 

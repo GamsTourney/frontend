@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { values } from 'lodash/object'
 
+import { selectPlayers } from 'selectors/collections'
 import { fetchPlayers } from '../actions'
 
 class PlayerList extends PureComponent {
@@ -53,7 +54,7 @@ PlayerList.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    players: values(state.players)
+    players: values(selectPlayers(state))
   }
 }
 
