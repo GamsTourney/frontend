@@ -1,3 +1,19 @@
+.score-card {
+  cursor: pointer;
+}
+
 .score-card img {
   height: 80px;
+  padding-right: 18px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.score-card-player-details {
+  display: inline-block;
+}
+
+.score-card-player-details > h4 {
+  padding: 10px 0;
+  margin: 0;
 }

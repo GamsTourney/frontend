@@ -1,6 +1,5 @@
 import initialState from 'store/initial'
 import { API_FETCH, API_RECEIVE } from 'actions/api'
-import { merge } from 'lodash/object'
 import { keyBy } from 'lodash/collection'
 
 function extractData(data) {
@@ -26,7 +25,7 @@ function buildApiReducer(collection) {
         return action
       case API_RECEIVE:
         if (action[collection]) {
-          newState = merge(extractData(action[collection]), state)
+          newState = Object.assign({}, state, extractData(action[collection]))
           return newState
         }
         return state

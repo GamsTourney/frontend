@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { Panel, Row, Col } from 'react-bootstrap'
+import { Panel } from 'react-bootstrap'
 import PlayerAvatar from 'modules/players/components/avatar'
 
 import { selectPlayerResults } from '../selectors'
@@ -13,22 +13,18 @@ class ScoreCard extends PureComponent {
 
     return (
       <Panel player={player.id} className='score-card'>
-        <Row>
-          <Col xs={1}>
-            <PlayerAvatar
-              key={player.id}
-              className='player-avatar'
-              player={player}
-              size='medium'
-            />
-          </Col>
-          <Col xs={11}>
-            <h4>{player.name}</h4>
-            <div>
-              Points: {results.points}
-            </div>
-          </Col>
-        </Row>
+        <PlayerAvatar
+          key={player.id}
+          className='player-avatar'
+          player={player}
+          size='medium'
+        />
+        <div className='score-card-player-details'>
+          <h4>{player.name}</h4>
+          <div>
+            Points: {results.points}
+          </div>
+        </div>
       </Panel>
     )
   }

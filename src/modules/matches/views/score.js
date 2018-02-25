@@ -6,17 +6,19 @@ import Sortable from 'react-sortablejs'
 import { fetchPlayers } from 'modules/players/actions'
 
 import ScoreCard from '../components/score_card'
-import { fetchMatch } from '../actions'
+import { fetchMatch, postScores } from '../actions'
 import {
   selectMatchId,
   selectMatch,
-  selectMatchPlayers
+  selectMatchPlayersWithResults
 } from '../selectors'
 import '../styles.css'
 
 
 const PlayerCards = ({ matchId, players }) => {
-  return players.map(player => <ScoreCard key={player.id} matchId={matchId} player={player} />)
+  return players.map(player => (
+    <ScoreCard key={player.id} matchId={matchId} player={player} />
+  ))
 }
 
 class MatchScore extends PureComponent {
@@ -33,7 +35,8 @@ class MatchScore extends PureComponent {
   }
 
   onChangeOrder(order, sortable, event) {
-    console.log(order)
+    const { matchId } = this.props
+    this.props.actions.postScores(matchId, order)
   }
 
   render() {
@@ -65,7 +68,7 @@ function mapStateToProps(state, props) {
   return {
     matchId: selectMatchId(state, props),
     matchData: selectMatch(state, props),
-    players: selectMatchPlayers(state, props)
+    players: selectMatchPlayersWithResults(state, props)
   }
 }
 
@@ -73,7 +76,8 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       fetchMatch,
-      fetchPlayers
+      fetchPlayers,
+      postScores
     }, dispatch)
   }
 }
