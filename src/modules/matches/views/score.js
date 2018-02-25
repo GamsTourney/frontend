@@ -14,7 +14,6 @@ import {
 } from '../selectors'
 import '../styles.css'
 
-
 const PlayerCards = ({ matchId, players }) => {
   return players.map(player => (
     <ScoreCard key={player.id} matchId={matchId} player={player} />

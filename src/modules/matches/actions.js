@@ -4,6 +4,10 @@ function fetchMatch(id) {
   return request('matches', `/matches/${id}?include=players,results`)
 }
 
+function fetchMatches(tournamentId) {
+  return request('matches', `/tournaments/${tournamentId}/matches`)
+}
+
 function postScores(id, order) {
   const data = new FormData()
   data.append('order', order)
@@ -18,5 +22,6 @@ function postScores(id, order) {
 
 export {
   fetchMatch,
+  fetchMatches,
   postScores
 }
