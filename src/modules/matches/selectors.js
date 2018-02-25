@@ -14,10 +14,7 @@ const selectMatch = createSelector(
 
 const selectMatchPlayerIds = createSelector(
   selectMatch,
-  (match) => {
-    const matchPlayers = match.players || []
-    return matchPlayers.map(player => player.id)
-  }
+  (match) => match.player_ids || []
 )
 
 const selectMatchPlayers = createSelector(
