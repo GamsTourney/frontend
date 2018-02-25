@@ -7,6 +7,7 @@ import { chunk } from 'lodash/array'
 import { Grid, Col, Row } from 'react-bootstrap'
 
 import GameCard from '../components/card'
+import { selectGames } from 'selectors/collections'
 import { fetchGames } from '../actions'
 
 const GameRow = ({ row }) => (
@@ -52,7 +53,7 @@ GameDetail.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    games: values(state.games)
+    games: values(selectGames(state))
   }
 }
 

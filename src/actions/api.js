@@ -6,9 +6,9 @@ function apiRecieve(collection, json) {
   return { type: API_RECEIVE, [collection]: json }
 }
 
-function request(collection, url, method = 'GET') {
+function request(collection, url, options) {
   return dispatch => {
-    return fetch(API_URL + url, { method })
+    return fetch(API_URL + url, options)
       .then(resp => resp.json())
       .then(json => dispatch(apiRecieve(collection, json)))
   }
