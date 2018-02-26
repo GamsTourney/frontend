@@ -16,6 +16,26 @@ const selectTournament = createSelector(
   (tournaments, tournamentId) => tournaments[tournamentId] || {}
 )
 
+const selectTournamentStandings = createSelector(
+  selectTournament,
+  (tournament) => tournament.standings || []
+)
+
+const selectTournamentStandingsForChart = createSelector(
+  selectTournamentStandings,
+  selectPlayers,
+  (standings, players) => (
+    standings.map((standing) => {
+      const player = find(players, player => `${player.id}` === `${standing.player}`)
+      if (player) {
+        const firstName = player.name.split(' ')[0]
+        return { name: firstName, score: standing.score }
+      }
+      return {}
+    })
+  )
+)
+
 const selectTournamentMatches = createSelector(
   selectTournamentId,
   selectMatches,
@@ -69,5 +89,6 @@ export {
   selectTournament,
   selectTournamentMatches,
   selectTournamentMatchesByPlayer,
-  selectTimelineData
+  selectTimelineData,
+  selectTournamentStandingsForChart
 }
