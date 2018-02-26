@@ -16,10 +16,10 @@ class Navigation extends Component {
           </Link>
         </Navbar.Header>
         <Nav className="collapse navbar-collapse">
-          <LinkContainer to='/tournament/1/live'>
+          <LinkContainer to='/tournaments/1/live'>
             <NavItem>Live</NavItem>
           </LinkContainer>
-          <LinkContainer to='/tournament/1/schedule'>
+          <LinkContainer to='/tournaments/1/schedule'>
             <NavItem>Schedule</NavItem>
           </LinkContainer>
           <LinkContainer to='/players'>

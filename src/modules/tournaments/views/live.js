@@ -1,69 +1,55 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { values } from 'lodash/object'
+import { Grid, Row, Col, Panel } from 'react-bootstrap'
+import { get } from 'lodash/object'
 
-import { selectTournaments } from 'selectors/collections'
-import { fetchTournaments } from '../actions'
+import TournamentStandings from '../components/standings'
 
 class TournamentLive extends PureComponent {
 
-  componentWillMount() {
-    this.props.actions.fetchTournaments()
-  }
-
-  renderData() {
-    const { tournaments } = this.props
-
-    return (
-      <ul>
-        {
-          tournaments.map((t) =>
-            <li key={t.id}>{t.name}</li>
-          )
-        }
-      </ul>
-    )
-  }
-
   render() {
-    const { tournaments } = this.props
+    const { tournamentId } = this.props
 
     return (
-      <div className="">
-        { tournaments.length > 0 ?
-          this.renderData() :
-          <div className="">
-            No Data
-          </div>
-        }
-      </div>
+      <Grid>
+        <Row>
+          <Col md={7}>
+            <Panel bsStyle='primary'>
+              <Panel.Heading>Standings</Panel.Heading>
+              <Panel.Body><TournamentStandings tournamentId={tournamentId} /></Panel.Body>
+            </Panel>
+          </Col>
+          <Col md={5}>
+            <Panel bsStyle='primary'>
+              <Panel.Heading>Up Next</Panel.Heading>
+              <Panel.Body>TODO</Panel.Body>
+            </Panel>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12}>
+            <Panel bsStyle='primary'>
+              <Panel.Heading>Other Stats</Panel.Heading>
+              <Panel.Body>TODO</Panel.Body>
+            </Panel>
+          </Col>
+        </Row>
+      </Grid>
     )
   }
 }
 
 TournamentLive.propTypes = {
-  actions: PropTypes.object.isRequired,
-  tournaments: PropTypes.array
+  tournamentId: PropTypes.string.isRequired,
 }
 
-TournamentLive.defaultProps = {
-  tournaments: []
-}
+function mapStateToProps(state, props) {
+  const tournamentId = get(props, 'match.params.id')
 
-function mapStateToProps(state) {
   return {
-    tournaments: values(selectTournaments(state))
+    tournamentId,
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({
-      fetchTournaments
-    }, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TournamentLive)
+export default connect(mapStateToProps)(TournamentLive)

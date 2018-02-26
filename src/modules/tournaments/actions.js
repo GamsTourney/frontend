@@ -4,6 +4,12 @@ function fetchTournaments() {
   return request('tournaments', '/tournaments')
 }
 
+function fetchTournament(id) {
+  return request('tournaments', `/tournaments/${id}?include=standings`)
+}
+
+
 export {
-  fetchTournaments
+  fetchTournaments,
+  fetchTournament
 }
