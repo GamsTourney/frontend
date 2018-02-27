@@ -35,21 +35,26 @@ class MatchScore extends PureComponent {
 
   onChangeOrder(order, sortable, event) {
     const { matchId } = this.props
+    sortable.sort(order)
     this.props.actions.postScores(matchId, order)
   }
 
   render() {
-    const { matchId, players } = this.props
+    const { matchId, matchData, players } = this.props
+    const game = matchData.game || {}
 
     return (
-      <Sortable
-        onChange={this.onChangeOrder}
-        options={{
-          dataIdAttr: 'player'
-        }}
-      >
-        <PlayerCards matchId={matchId} players={players}/>
-      </Sortable>
+      <div className='score-sorter'>
+        <h4>{game.name} ({matchData.id})</h4>
+        <Sortable
+          onChange={this.onChangeOrder}
+          options={{
+            dataIdAttr: 'player'
+          }}
+        >
+          <PlayerCards matchId={matchId} players={players}/>
+        </Sortable>
+      </div>
     )
   }
 }
