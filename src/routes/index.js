@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router'
 
+import TournamentLive from 'modules/tournaments/views/live'
 import tournamentRoutes from 'modules/tournaments/routes'
 import playerRoutes from 'modules/players/routes'
 import gameRoutes from 'modules/games/routes'
@@ -18,6 +19,7 @@ function combineRoutes(routes) {
 }
 
 export default combineRoutes({
+  '/': TournamentLive,
   ...tournamentRoutes,
   ...playerRoutes,
   ...gameRoutes,

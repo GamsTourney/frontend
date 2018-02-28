@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import {
   ResponsiveContainer,
   BarChart,
@@ -11,10 +9,6 @@ import {
   Tooltip,
   Rectangle
 } from 'recharts'
-
-import { fetchPlayers } from 'modules/players/actions'
-import { fetchTournament } from '../actions'
-import { selectTournamentStandingsForChart } from '../selectors'
 
 const COLORS = [
   '#396AB1',
@@ -34,16 +28,11 @@ const RainbowBar = (props) => {
 
 class TournamentStandings extends PureComponent {
 
-  componentWillMount() {
-    this.props.actions.fetchPlayers()
-    this.props.actions.fetchTournament(this.props.tournamentId)
-  }
-
   render() {
     const { standings } = this.props
 
     return (
-      <ResponsiveContainer width='100%' height={400}>
+      <ResponsiveContainer width='100%' height={340}>
         <BarChart data={standings} layout='vertical'>
           <YAxis type='category' dataKey='name'/>
           <XAxis type='number' />
@@ -56,23 +45,7 @@ class TournamentStandings extends PureComponent {
 }
 
 TournamentStandings.propTypes = {
-  tournamentId: PropTypes.string.isRequired,
   standings: PropTypes.array.isRequired
 }
 
-function mapStateToProps(state, props) {
-  return {
-    standings: selectTournamentStandingsForChart(state, props)
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({
-      fetchTournament,
-      fetchPlayers
-    }, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TournamentStandings)
+export default TournamentStandings
