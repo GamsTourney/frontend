@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { get } from 'lodash/object'
-import { filter, find } from 'lodash/collection'
+import { filter, find, orderBy } from 'lodash/collection'
 import {
   selectMatches,
   selectTournaments,
@@ -40,6 +40,15 @@ const selectTournamentMatches = createSelector(
   selectTournamentId,
   selectMatches,
   (tournamentId, matches) => filter(matches, match => `${match.tournament_id}` === `${tournamentId}`)
+)
+
+const selectUpcomingMatches = createSelector(
+  selectTournamentMatches,
+  (matches) => {
+    const unfinished = filter(matches, match => !match.completed && !match.hidden)
+    const sorted = orderBy(unfinished, ['start_time'], ['asc'])
+    return sorted.slice(0, 6)
+  }
 )
 
 const selectTournamentMatchesByPlayer = createSelector(
@@ -88,6 +97,7 @@ const selectTimelineData = createSelector(
 export {
   selectTournament,
   selectTournamentMatches,
+  selectUpcomingMatches,
   selectTournamentMatchesByPlayer,
   selectTimelineData,
   selectTournamentStandingsForChart
