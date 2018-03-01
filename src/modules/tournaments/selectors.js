@@ -21,6 +21,11 @@ const selectTournamentStandings = createSelector(
   (tournament) => tournament.standings || []
 )
 
+const selectTournamentStats = createSelector(
+  selectTournament,
+  (tournament) => tournament.stats || {}
+)
+
 const selectTournamentStandingsForChart = createSelector(
   selectTournamentStandings,
   selectPlayers,
@@ -94,11 +99,23 @@ const selectTimelineData = createSelector(
   }
 )
 
+const selectProgressData = createSelector(
+  selectTournamentMatches,
+  (matches) => {
+    const matchesCompleted = filter(matches, (match) => match.completed).length
+    return {
+      matchProgress: (matchesCompleted / matches.length) * 100
+    }
+  }
+)
+
 export {
   selectTournament,
+  selectTournamentStats,
   selectTournamentMatches,
   selectUpcomingMatches,
   selectTournamentMatchesByPlayer,
   selectTimelineData,
-  selectTournamentStandingsForChart
+  selectTournamentStandingsForChart,
+  selectProgressData
 }
