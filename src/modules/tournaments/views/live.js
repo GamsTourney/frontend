@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Grid, Row, Col, Panel } from 'react-bootstrap'
 import { get } from 'lodash/object'
+import { chunk } from 'lodash/array'
 
 import { fetchPlayers } from 'modules/players/actions'
 import { fetchGames } from 'modules/games/actions'
@@ -12,10 +13,14 @@ import MatchCard from 'modules/matches/components/match_card'
 import { fetchTournament } from '../actions'
 import {
   selectUpcomingMatches,
-  selectTournamentStandingsForChart
+  selectTournamentStandingsForChart,
+  selectProgressData,
+  selectTournamentStats
 } from '../selectors'
 import TournamentStandings from '../components/standings'
-import {chunk} from "lodash/array";
+import TournamentProgress from '../components/progress'
+import TournamentStats from '../components/stats'
+import '../styles.css'
 
 const REFRESH_INTERVAL = 10000
 
@@ -53,7 +58,7 @@ class TournamentLive extends PureComponent {
   }
 
   render() {
-    const { standings, upcomingMatches } = this.props
+    const { standings, progressData, upcomingMatches, stats } = this.props
 
     return (
       <Grid>
@@ -72,10 +77,16 @@ class TournamentLive extends PureComponent {
           </Col>
         </Row>
         <Row>
-          <Col md={12}>
+          <Col md={5}>
             <Panel bsStyle='primary'>
-              <Panel.Heading>Other Stats</Panel.Heading>
-              <Panel.Body>TODO</Panel.Body>
+              <Panel.Heading>Progress</Panel.Heading>
+              <Panel.Body><TournamentProgress progressData={progressData} /></Panel.Body>
+            </Panel>
+          </Col>
+          <Col md={7}>
+            <Panel bsStyle='primary'>
+              <Panel.Heading>Useless Stats</Panel.Heading>
+              <Panel.Body><TournamentStats stats={stats} /></Panel.Body>
             </Panel>
           </Col>
         </Row>
@@ -96,7 +107,9 @@ function mapStateToProps(state, props) {
   return {
     tournamentId,
     standings: selectTournamentStandingsForChart(state, { tournamentId }),
-    upcomingMatches: selectUpcomingMatches(state, { tournamentId })
+    upcomingMatches: selectUpcomingMatches(state, { tournamentId }),
+    progressData: selectProgressData(state, { tournamentId }),
+    stats: selectTournamentStats(state, { tournamentId })
   }
 }
 

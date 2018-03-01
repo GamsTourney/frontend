@@ -25,7 +25,9 @@ class MatchCard extends PureComponent {
                   player={player}
                   size='small'
                   style={{
-                    width: '40px', paddingRight: '6px'
+                    width: '30px',
+                    marginRight: '6px',
+                    marginBottom: '6px'
                   }}
                   circle
                 />
