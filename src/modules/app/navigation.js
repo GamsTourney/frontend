@@ -13,22 +13,25 @@ class Navigation extends Component {
               <Image src={require('images/controller.png')} />
             </span>
             <Navbar.Brand>Gams</Navbar.Brand>
+            <Navbar.Toggle />
           </Link>
         </Navbar.Header>
-        <Nav className="collapse navbar-collapse">
-          <LinkContainer to='/tournaments/1/live'>
-            <NavItem>Live</NavItem>
-          </LinkContainer>
-          <LinkContainer to='/tournaments/1/schedule'>
-            <NavItem>Schedule</NavItem>
-          </LinkContainer>
-          <LinkContainer to='/players'>
-            <NavItem>Players</NavItem>
-          </LinkContainer>
-          <LinkContainer to='/games'>
-            <NavItem>Games</NavItem>
-          </LinkContainer>
-        </Nav>
+        <Navbar.Collapse>
+          <Nav>
+            <LinkContainer to='/tournaments/1/live'>
+              <NavItem>Live</NavItem>
+            </LinkContainer>
+            <LinkContainer to='/tournaments/1/schedule'>
+              <NavItem>Schedule</NavItem>
+            </LinkContainer>
+            <LinkContainer to='/players'>
+              <NavItem>Players</NavItem>
+            </LinkContainer>
+            <LinkContainer to='/games'>
+              <NavItem>Games</NavItem>
+            </LinkContainer>
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     )
   }

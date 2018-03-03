@@ -40,7 +40,6 @@ class MatchScore extends PureComponent {
   }
 
   onChangeOrder(order, sortable, event) {
-    const { matchId } = this.props
     this.setState({ order })
     sortable.sort(order)
   }
