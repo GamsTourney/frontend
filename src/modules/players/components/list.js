@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { values } from 'lodash/object'
@@ -19,8 +20,13 @@ class PlayerList extends PureComponent {
     return (
       <ul>
         {
-          players.map((t) =>
-            <li key={t.id}>{t.name}</li>
+          players.map((p) =>
+            <li key={p.id}>
+              <Link to={`/players/${p.id}`}>
+                {p.name}
+              </Link>
+            </li>
+
           )
         }
       </ul>
