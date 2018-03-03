@@ -3,6 +3,6 @@ import PlayerDetail from './views/detail'
 
 const root = '/players'
 export default {
-  [root]: PlayerList,
-  [root + '/:id']: PlayerDetail
+  [root]: { component: PlayerList },
+  [root + '/:id']: { component: PlayerDetail }
 }

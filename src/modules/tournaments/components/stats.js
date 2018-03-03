@@ -17,14 +17,15 @@ class TournamentStats extends PureComponent {
     return (
       <div>
         {
-          Object.keys(stats).map((stat) => {
+          Object.keys(stats).map((stat, idx) => {
             const { player } = stats[stat]
             const playerData = players[player]
+
             return (
               <div key={stat}>
                 <h6>{FRIENDLY_STAT_NAMES[stat]}</h6>
                 <PlayerAvatar
-                  key={playerData.id}
+                  key={idx}
                   player={playerData}
                   size='medium'
                   circle

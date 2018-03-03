@@ -3,6 +3,6 @@ import TournamentLive from './views/live'
 
 const root = '/tournaments'
 export default {
-  [root + '/:id/schedule']: TournamentSchedule,
-  [root + '/:id/live']: TournamentLive
+  [root + '/:id/schedule']: { component: TournamentSchedule },
+  [root + '/:id/live']: { component: TournamentLive }
 }
