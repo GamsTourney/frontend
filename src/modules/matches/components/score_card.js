@@ -22,7 +22,7 @@ class ScoreCard extends PureComponent {
         <div className='score-card-player-details'>
           <h4>{player.name}</h4>
           <div>
-            Points: {results.points}
+            Points: {results.points || 0}
           </div>
         </div>
       </Panel>
