@@ -13,7 +13,7 @@ class PlayerAvatar extends PureComponent {
   render() {
     const { player, size } = this.props
 
-    if (!player) {
+    if (!player || !player.steam) {
       return null
     }
 

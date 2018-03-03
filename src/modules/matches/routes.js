@@ -3,6 +3,6 @@ import MatchScore from './views/score'
 
 const root = '/matches'
 export default {
-  [root + '/:id']: MatchDetail,
-  [root + '/:id/score']: MatchScore
+  [root + '/:id']: { component: MatchDetail },
+  [root + '/:id/score']: { component: MatchScore, admin: true }
 }
