@@ -6,7 +6,8 @@ import { selectPlayersById } from 'modules/players/selectors'
 import PlayerAvatar from 'modules/players/components/avatar'
 
 const FRIENDLY_STAT_NAMES = {
-  most_second_places: 'Most Second Places'
+  most_second_places: 'Most Second Places',
+  longest_streak: 'Longest Win Streak'
 }
 
 class TournamentStats extends PureComponent {
