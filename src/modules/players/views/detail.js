@@ -35,7 +35,7 @@ const DemoChart = () => {
   )
 }
 
-const PlayerMatches = ({ matches }) => {
+const PlayerMatches = ({ matches = [] }) => {
   return matches.map((match) => (
     <div key={match.id}>{`Game ${match.game_id} at ${match.start_time}`}</div>
   ))

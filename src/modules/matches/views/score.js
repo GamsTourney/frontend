@@ -10,8 +10,10 @@ import { fetchMatch, postScores } from '../actions'
 import {
   selectMatchId,
   selectMatch,
-  selectMatchPlayersWithResults
+  selectMatchPlayersWithResults,
+  selectMatchPlayerOrder
 } from '../selectors'
+import { Button } from 'react-bootstrap'
 import '../styles.css'
 
 const PlayerCards = ({ matchId, players }) => {
@@ -24,7 +26,11 @@ class MatchScore extends PureComponent {
 
   constructor(props) {
     super(props)
+    this.state = {
+      order: null
+    }
     this.onChangeOrder = this.onChangeOrder.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -35,7 +41,13 @@ class MatchScore extends PureComponent {
 
   onChangeOrder(order, sortable, event) {
     const { matchId } = this.props
+    this.setState({ order })
     sortable.sort(order)
+  }
+
+  handleSubmit() {
+    const { matchId } = this.props
+    const order = this.state.order || this.props.order
     this.props.actions.postScores(matchId, order)
   }
 
@@ -45,7 +57,7 @@ class MatchScore extends PureComponent {
 
     return (
       <div className='score-sorter'>
-        <h4>{game.name} ({matchData.id})</h4>
+        <h4>{game.name}</h4>
         <Sortable
           onChange={this.onChangeOrder}
           options={{
@@ -54,6 +66,14 @@ class MatchScore extends PureComponent {
         >
           <PlayerCards matchId={matchId} players={players}/>
         </Sortable>
+        <Button
+          type='submit'
+          bsStyle={ matchData.completed ? 'success' : 'primary' }
+          className='pull-right'
+          onClick={this.handleSubmit}
+        >
+          { matchData.completed ? 'Update' : 'Submit' }
+        </Button>
       </div>
     )
   }
@@ -61,7 +81,9 @@ class MatchScore extends PureComponent {
 
 MatchScore.propTypes = {
   actions: PropTypes.object.isRequired,
-  matchData: PropTypes.object
+  matchData: PropTypes.object,
+  players: PropTypes.array.isRequired,
+  order: PropTypes.array.isRequired
 }
 
 MatchScore.defaultProps = {
@@ -72,7 +94,8 @@ function mapStateToProps(state, props) {
   return {
     matchId: selectMatchId(state, props),
     matchData: selectMatch(state, props),
-    players: selectMatchPlayersWithResults(state, props)
+    players: selectMatchPlayersWithResults(state, props),
+    order: selectMatchPlayerOrder(state, props)
   }
 }
 

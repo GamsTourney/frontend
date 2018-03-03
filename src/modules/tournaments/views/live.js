@@ -49,10 +49,16 @@ class TournamentLive extends PureComponent {
     this.props.actions.fetchGames()
   }
 
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout)
+    }
+  }
+
   fetchMatchData = () => {
     this.props.actions.fetchMatches(this.props.tournamentId)
     this.props.actions.fetchTournament(this.props.tournamentId)
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.fetchMatchData()
     }, REFRESH_INTERVAL)
   }

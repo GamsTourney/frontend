@@ -15,7 +15,7 @@ class MatchCard extends PureComponent {
 
     return (
       <Panel className='match-card'>
-        <LinkContainer style={{ cursor: 'pointer' }} to={`/matches/${matchData.id}`}>
+        <LinkContainer style={{ cursor: 'pointer' }} to={`/matches/${matchData.id}/score`}>
           <Panel.Body>
             <h6 style={{ marginTop: '0px' }}>{game.name}</h6>
             {
@@ -25,7 +25,7 @@ class MatchCard extends PureComponent {
                   player={player}
                   size='small'
                   style={{
-                    width: '30px',
+                    width: '35px',
                     marginRight: '6px',
                     marginBottom: '6px'
                   }}

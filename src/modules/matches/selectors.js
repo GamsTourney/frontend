@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { get } from 'lodash/object'
-import { filter, find, keyBy, orderBy } from 'lodash/collection'
+import { filter, find, keyBy, orderBy, map } from 'lodash/collection'
 import { selectMatches, selectPlayers } from 'selectors/collections'
 
 const selectMatchId = (state, props) => get(props, 'match.params.id') || props.matchId
@@ -32,7 +32,7 @@ const selectMatchResults = createSelector(
 const selectPlayerResults = createSelector(
   selectMatchResults,
   selectPlayerId,
-  (results, playerId) => find(results, result => result.player_id === playerId)
+  (results, playerId) => find(results, result => result.player_id === playerId) || {}
 )
 
 const selectMatchPlayersWithResults = createSelector(
@@ -40,9 +40,14 @@ const selectMatchPlayersWithResults = createSelector(
   selectMatchResults,
   (players, results) => {
     const playerResults = keyBy(results, 'player_id')
-    players.forEach(player => player.results = playerResults[player.id])
+    players.forEach(player => player.results = playerResults[player.id] || {})
     return orderBy(players, player => player.results.position)
   }
+)
+
+const selectMatchPlayerOrder = createSelector(
+  selectMatchPlayersWithResults,
+  players => map(players, player => `${player.id}`)
 )
 
 export {
@@ -50,5 +55,6 @@ export {
   selectMatch,
   selectMatchPlayers,
   selectPlayerResults,
-  selectMatchPlayersWithResults
+  selectMatchPlayersWithResults,
+  selectMatchPlayerOrder
 }
