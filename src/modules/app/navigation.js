@@ -24,9 +24,6 @@ class Navigation extends Component {
             <LinkContainer to='/tournaments/1/schedule'>
               <NavItem>Schedule</NavItem>
             </LinkContainer>
-            <LinkContainer to='/players'>
-              <NavItem>Players</NavItem>
-            </LinkContainer>
             <LinkContainer to='/games'>
               <NavItem>Games</NavItem>
             </LinkContainer>
