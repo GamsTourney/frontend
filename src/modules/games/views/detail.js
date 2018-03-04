@@ -15,7 +15,7 @@ import {chunk} from "lodash/array";
 
 const MatchRow = ({ row }) => (
   row.map((match) => (
-    <Col key={match.id} xs={4}>
+    <Col key={match.id} sm={4} xs={12}>
       <MatchCard
         key={match.id}
         matchData={match}

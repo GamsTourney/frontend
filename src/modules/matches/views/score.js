@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import Sortable from 'react-sortablejs'
 import { fetchPlayers } from 'modules/players/actions'
@@ -56,7 +57,9 @@ class MatchScore extends PureComponent {
 
     return (
       <div className='score-sorter'>
-        <h4>{game.name}</h4>
+        <Link to={`/games/${game.id}`}>
+          <h4>{game.name}</h4>
+        </Link>
         <Sortable
           onChange={this.onChangeOrder}
           options={{
