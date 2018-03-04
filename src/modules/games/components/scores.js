@@ -6,8 +6,7 @@ class GameScores extends PureComponent {
 
   render() {
     const { game } = this.props
-    const { scores } = game
-
+    const scores = game.scores || []
 
     return (
       <ButtonGroup

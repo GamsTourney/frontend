@@ -3,6 +3,10 @@ img.player-avatar {
   margin: 0 auto;
 }
 
+.avatar-winner {
+  border: 3px solid #4CAF50;
+}
+
 .recharts-wrapper {
   display: block;
   margin: 0 auto;

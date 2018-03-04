@@ -13,8 +13,8 @@ class Navigation extends Component {
               <Image src={require('images/controller.png')} />
             </span>
             <Navbar.Brand>Gams</Navbar.Brand>
-            <Navbar.Toggle />
           </Link>
+          <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
