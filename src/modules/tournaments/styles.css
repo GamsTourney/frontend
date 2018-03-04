@@ -1,3 +1,7 @@
 div.progress {
   height: 18px;
 }
+
+.stat-container {
+  text-align: center;
+}

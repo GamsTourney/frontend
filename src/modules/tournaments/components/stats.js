@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import { Col } from 'react-bootstrap'
 
 import { selectPlayersById } from 'modules/players/selectors'
 import PlayerAvatar from 'modules/players/components/avatar'
 
 const FRIENDLY_STAT_NAMES = {
-  most_second_places: 'Most Second Places',
-  longest_streak: 'Longest Win Streak'
+  most_second_places: 'Always the Bridesmaid',
+  longest_streak: 'Hot Streak',
+  most_game_wins: 'Best Single Game'
 }
 
 class TournamentStats extends PureComponent {
@@ -19,11 +21,12 @@ class TournamentStats extends PureComponent {
       <div>
         {
           Object.keys(stats).map((stat, idx) => {
-            const { player } = stats[stat]
+            const { player, value, game } = stats[stat]
+            console.log(game)
             const playerData = players[player]
 
             return (
-              <div key={stat}>
+              <Col className='stat-container' md={4} xs={6} key={stat}>
                 <h6>{FRIENDLY_STAT_NAMES[stat]}</h6>
                 <PlayerAvatar
                   key={idx}
@@ -31,7 +34,13 @@ class TournamentStats extends PureComponent {
                   size='medium'
                   circle
                 />
-              </div>
+                <br />
+                <span>Count: {value}</span>
+                {
+                  game &&
+                  <span><br />{game.name}</span>
+                }
+              </Col>
             )
           })
         }
