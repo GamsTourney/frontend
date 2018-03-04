@@ -47,7 +47,7 @@ class MatchCard extends PureComponent {
                       marginBottom: '6px'
                     }}
                     circle
-                    winner={winner}
+                    winner={winner ? 'true' : undefined}
                   />
                 )
               })
