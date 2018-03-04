@@ -11,7 +11,7 @@ const SIZES = {
 class PlayerAvatar extends PureComponent {
 
   render() {
-    const { player, size } = this.props
+    const { player, size, winner } = this.props
 
     if (!player || !player.steam) {
       return null
@@ -19,10 +19,12 @@ class PlayerAvatar extends PureComponent {
 
     const avatarKey = `avatar${SIZES[size]}`
     const src = player.steam[avatarKey]
+    const className = winner ? 'avatar-winner' : ''
 
     return (
       <Image
         src={src}
+        className={className}
         {...this.props}
       />
     )

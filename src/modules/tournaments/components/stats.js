@@ -22,7 +22,6 @@ class TournamentStats extends PureComponent {
         {
           Object.keys(stats).map((stat, idx) => {
             const { player, value, game } = stats[stat]
-            console.log(game)
             const playerData = players[player]
 
             return (

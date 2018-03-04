@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { get } from 'lodash/object'
 
 import { fetchMatch } from '../actions'
+import '../styles.css'
 
 class MatchDetail extends PureComponent {
 
