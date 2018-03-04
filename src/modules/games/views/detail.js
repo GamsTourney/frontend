@@ -44,7 +44,6 @@ class GameDetail extends PureComponent {
 
   render() {
     const { game, matches } = this.props
-    console.log(this.props)
 
     if(!game) {
       return null
