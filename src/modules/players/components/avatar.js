@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
-import { Image } from 'react-bootstrap'
+import { Image, Tooltip, OverlayTrigger } from 'react-bootstrap'
 
 const SIZES = {
   small: '',
@@ -9,6 +9,14 @@ const SIZES = {
 }
 
 class PlayerAvatar extends PureComponent {
+
+  renderTooltip() {
+    const { player } = this.props
+
+    return (
+      <Tooltip>{player.name}</Tooltip>
+    )
+  }
 
   render() {
     const { player, size, winner } = this.props
@@ -22,11 +30,13 @@ class PlayerAvatar extends PureComponent {
     const className = winner ? 'avatar-winner' : ''
 
     return (
-      <Image
-        src={src}
-        className={className}
-        {...this.props}
-      />
+      <OverlayTrigger placement='top' overlay={this.renderTooltip()} >
+        <Image
+          src={src}
+          className={className}
+          {...this.props}
+        />
+      </OverlayTrigger>
     )
   }
 }
