@@ -14,7 +14,7 @@ class PlayerAvatar extends PureComponent {
     const { player } = this.props
 
     return (
-      <Tooltip>{player.name}</Tooltip>
+      <Tooltip id='avatar-tooltip'>{player.name}</Tooltip>
     )
   }
 
