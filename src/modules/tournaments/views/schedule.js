@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/object'
 import { Chart } from 'react-google-charts'
-import { Panel } from 'react-bootstrap'
+import { Panel, Glyphicon } from 'react-bootstrap'
 
 import { selectTimelineData } from '../selectors'
 import { fetchMatches } from 'modules/matches/actions'
@@ -29,7 +29,7 @@ class TournamentSchedule extends PureComponent {
     return (
       <Panel bsStyle='primary'>
         <Panel.Heading>
-          Tournament Schedule
+          <Glyphicon glyph="calendar" /> Tournament Schedule
         </Panel.Heading>
         <Panel.Body>
           <Chart
