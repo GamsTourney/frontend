@@ -5,3 +5,7 @@ div.progress {
 .stat-container {
   text-align: center;
 }
+
+.panel-heading > .glyphicon {
+  padding-right: 3px;
+}

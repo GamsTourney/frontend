@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Grid, Row, Col, Panel } from 'react-bootstrap'
+import { Grid, Row, Col, Panel, Glyphicon } from 'react-bootstrap'
 import { get } from 'lodash/object'
 import { chunk } from 'lodash/array'
 
@@ -71,13 +71,17 @@ class TournamentLive extends PureComponent {
         <Row>
           <Col md={7}>
             <Panel bsStyle='primary'>
-              <Panel.Heading>Standings</Panel.Heading>
+              <Panel.Heading>
+                <Glyphicon glyph="stats" /> Standings
+              </Panel.Heading>
               <Panel.Body><TournamentStandings standings={standings} /></Panel.Body>
             </Panel>
           </Col>
           <Col md={5}>
             <Panel bsStyle='primary'>
-              <Panel.Heading>Up Next</Panel.Heading>
+              <Panel.Heading>
+                <Glyphicon glyph="calendar" /> Up Next
+              </Panel.Heading>
               <Panel.Body><MatchCards matches={upcomingMatches} /></Panel.Body>
             </Panel>
           </Col>
@@ -85,13 +89,17 @@ class TournamentLive extends PureComponent {
         <Row>
           <Col md={5}>
             <Panel bsStyle='primary'>
-              <Panel.Heading>Progress</Panel.Heading>
+              <Panel.Heading>
+                <Glyphicon glyph="play" /> Progress
+              </Panel.Heading>
               <Panel.Body><TournamentProgress progressData={progressData} /></Panel.Body>
             </Panel>
           </Col>
           <Col md={7}>
             <Panel bsStyle='primary'>
-              <Panel.Heading>Useless Stats</Panel.Heading>
+              <Panel.Heading>
+                <Glyphicon glyph="glass" /> Awards
+              </Panel.Heading>
               <Panel.Body><TournamentStats stats={stats} /></Panel.Body>
             </Panel>
           </Col>
