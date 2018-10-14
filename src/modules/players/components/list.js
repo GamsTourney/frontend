@@ -6,12 +6,13 @@ import { bindActionCreators } from 'redux'
 import { values } from 'lodash/object'
 
 import { selectPlayers } from 'selectors/collections'
+import { selectTournamentId } from 'modules/tournaments/selectors'
 import { fetchPlayers } from '../actions'
 
 class PlayerList extends PureComponent {
 
   componentDidMount() {
-    this.props.actions.fetchPlayers()
+    this.props.actions.fetchPlayers(this.props.tournamentId)
   }
 
   renderData() {
@@ -51,6 +52,7 @@ class PlayerList extends PureComponent {
 
 PlayerList.propTypes = {
   actions: PropTypes.object.isRequired,
+  tournamentId: PropTypes.string.isRequired,
   players: PropTypes.array
 }
 
@@ -60,6 +62,7 @@ PlayerList.defaultProps = {
 
 function mapStateToProps(state) {
   return {
+    tournamentId: selectTournamentId(state),
     players: values(selectPlayers(state))
   }
 }

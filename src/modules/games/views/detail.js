@@ -5,13 +5,16 @@ import { bindActionCreators } from 'redux'
 import { get } from 'lodash/object'
 import { Row, Col, Panel } from 'react-bootstrap'
 
+
 import GameCard from '../components/card'
 import MatchCard from 'modules/matches/components/match_card'
 import { fetchPlayers } from 'modules/players/actions'
+import { selectTournamentId } from 'modules/tournaments/selectors'
 import { selectGame, selectMatchesForGame } from '../selectors'
 import { fetchGame, fetchMatchesForGame } from '../actions'
+import { chunk } from "lodash/array"
+
 import '../styles.css'
-import {chunk} from "lodash/array";
 
 const MatchRow = ({ row }) => (
   row.map((match) => (
@@ -39,7 +42,7 @@ class GameDetail extends PureComponent {
   componentDidMount() {
     this.props.actions.fetchGame(this.props.gameId)
     this.props.actions.fetchMatchesForGame(this.props.gameId)
-    this.props.actions.fetchPlayers()
+    this.props.actions.fetchPlayers(this.props.tournamentId)
   }
 
   render() {
@@ -66,6 +69,7 @@ class GameDetail extends PureComponent {
 
 GameDetail.propTypes = {
   actions: PropTypes.object.isRequired,
+  tournamentId: PropTypes.string.isRequired,
   game: PropTypes.object,
   matches: PropTypes.array.isRequired
 }
@@ -76,8 +80,10 @@ GameDetail.defaultProps = {
 
 function mapStateToProps(state, props) {
   const gameId = Number(get(props, 'match.params.id'))
+  const tournamentId = selectTournamentId(state)
 
   return {
+    tournamentId,
     gameId,
     game: selectGame(state, props),
     matches: selectMatchesForGame(state, props)

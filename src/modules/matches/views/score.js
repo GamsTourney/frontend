@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import Sortable from 'react-sortablejs'
-import { fetchPlayers } from 'modules/players/actions'
 
 import ScoreCard from '../components/score_card'
+import { selectTournamentId } from 'modules/tournaments/selectors'
+import { fetchPlayers } from 'modules/players/actions'
 import { fetchMatch, postScores } from '../actions'
 import {
   selectMatchId,
@@ -35,9 +36,9 @@ class MatchScore extends PureComponent {
   }
 
   componentDidMount() {
-    const { matchId } = this.props
+    const { matchId, tournamentId } = this.props
     this.props.actions.fetchMatch(matchId)
-    this.props.actions.fetchPlayers()
+    this.props.actions.fetchPlayers(tournamentId)
   }
 
   onChangeOrder(order, sortable, event) {
@@ -83,6 +84,7 @@ class MatchScore extends PureComponent {
 
 MatchScore.propTypes = {
   actions: PropTypes.object.isRequired,
+  tournamentId: PropTypes.string.isRequired,
   matchData: PropTypes.object,
   players: PropTypes.array.isRequired,
   order: PropTypes.array.isRequired
@@ -94,6 +96,7 @@ MatchScore.defaultProps = {
 
 function mapStateToProps(state, props) {
   return {
+    tournamentId: selectTournamentId(state),
     matchId: selectMatchId(state, props),
     matchData: selectMatch(state, props),
     players: selectMatchPlayersWithResults(state, props),

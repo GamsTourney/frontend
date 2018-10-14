@@ -8,7 +8,8 @@ import {
   selectGames
 } from 'selectors/collections'
 
-const selectTournamentId = (state, props) => get(props, 'match.params.id') || props.tournamentId
+// TODO: 1 is only here as a hack until tournament selector is implemented
+const selectTournamentId = (state, props) => get(props, 'match.params.id') || get(props, 'tournamentId') || '1'
 
 const selectTournament = createSelector(
   selectTournaments,
@@ -110,6 +111,7 @@ const selectProgressData = createSelector(
 )
 
 export {
+  selectTournamentId,
   selectTournament,
   selectTournamentStats,
   selectTournamentMatches,

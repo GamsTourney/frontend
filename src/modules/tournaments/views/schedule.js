@@ -2,21 +2,21 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { get } from 'lodash/object'
 import { Chart } from 'react-google-charts'
 import { Panel, Glyphicon } from 'react-bootstrap'
 
-import { selectTimelineData } from '../selectors'
 import { fetchMatches } from 'modules/matches/actions'
 import { fetchPlayers } from 'modules/players/actions'
 import { fetchGames } from 'modules/games/actions'
+import { selectTournamentId } from 'modules/tournaments/selectors'
+import { selectTimelineData } from '../selectors'
 
 class TournamentSchedule extends PureComponent {
 
   componentWillMount() {
     this.props.actions.fetchMatches(this.props.tournamentId)
     this.props.actions.fetchGames()
-    this.props.actions.fetchPlayers()
+    this.props.actions.fetchPlayers(this.props.tournamentId)
   }
 
   render() {
@@ -62,6 +62,7 @@ class TournamentSchedule extends PureComponent {
 
 TournamentSchedule.propTypes = {
   actions: PropTypes.object.isRequired,
+  tournamentId: PropTypes.string.isRequired,
   timelineData: PropTypes.array
 }
 
@@ -70,10 +71,8 @@ TournamentSchedule.defaultProps = {
 }
 
 function mapStateToProps(state, props) {
-  const tournamentId = get(props, 'match.params.id')
-
   return {
-    tournamentId,
+    tournamentId: selectTournamentId(state),
     timelineData: selectTimelineData(state, props)
   }
 }
