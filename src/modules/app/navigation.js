@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import {
@@ -8,9 +10,12 @@ import {
   Image
 } from 'react-bootstrap'
 import TournamentDropdown from 'modules/tournaments/components/dropdown'
+import { selectTournamentId } from 'modules/tournaments/selectors'
 
 class Navigation extends Component {
   render() {
+    const { tournamentId } = this.props
+
     return (
       <Navbar>
         <Navbar.Header>
@@ -25,13 +30,13 @@ class Navigation extends Component {
         <Navbar.Collapse>
           <TournamentDropdown />
           <Nav>
-            <LinkContainer to='/tournaments/1/live'>
+            <LinkContainer to={`/tournaments/${tournamentId}/live`}>
               <NavItem>Live</NavItem>
             </LinkContainer>
-            <LinkContainer to='/tournaments/1/schedule'>
+            <LinkContainer to={`/tournaments/${tournamentId}/schedule`}>
               <NavItem>Schedule</NavItem>
             </LinkContainer>
-            <LinkContainer to='/games'>
+            <LinkContainer to={`/tournaments/${tournamentId}/games`}>
               <NavItem>Games</NavItem>
             </LinkContainer>
           </Nav>
@@ -41,4 +46,14 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation
+Navigation.propTypes = {
+  tournamentId: PropTypes.number.isRequired
+}
+
+function mapStateToProps(state) {
+  return {
+    tournamentId: selectTournamentId(state)
+  }
+}
+
+export default connect(mapStateToProps)(Navigation)
