@@ -3,7 +3,6 @@ import React, { PureComponent } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Grid, Row, Col, Panel, Glyphicon } from 'react-bootstrap'
-import { get } from 'lodash/object'
 import { chunk } from 'lodash/array'
 
 import { fetchPlayers } from 'modules/players/actions'
@@ -12,6 +11,7 @@ import { fetchMatches } from 'modules/matches/actions'
 import MatchCard from 'modules/matches/components/match_card'
 import { fetchTournament } from '../actions'
 import {
+  selectTournamentId,
   selectUpcomingMatches,
   selectTournamentStandingsForChart,
   selectProgressData,
@@ -45,7 +45,7 @@ class TournamentLive extends PureComponent {
 
   componentWillMount() {
     this.fetchMatchData()
-    this.props.actions.fetchPlayers()
+    this.props.actions.fetchPlayers(this.props.tournamentId)
     this.props.actions.fetchGames()
   }
 
@@ -116,7 +116,7 @@ TournamentLive.propTypes = {
 
 
 function mapStateToProps(state, props) {
-  const tournamentId = get(props, 'match.params.id') || '1'
+  const tournamentId = selectTournamentId(state)
 
   return {
     tournamentId,

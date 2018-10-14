@@ -1,7 +1,7 @@
 import { request } from "../../actions/api"
 
-function fetchPlayers() {
-  return request('players', '/players')
+function fetchPlayers(tournamentId) {
+  return request('players', `/tournaments/${tournamentId}/players`)
 }
 
 function fetchPlayer(id) {

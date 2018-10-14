@@ -23,7 +23,7 @@ const GameCards = ({ games, columns = 2 }) => {
   return rows.map((row, idx) => <Row key={idx}><GameRow row={row}/></Row>)
 }
 
-class GameDetail extends PureComponent {
+class GameList extends PureComponent {
 
   componentDidMount() {
     this.props.actions.fetchGames()
@@ -42,12 +42,12 @@ class GameDetail extends PureComponent {
   }
 }
 
-GameDetail.propTypes = {
+GameList.propTypes = {
   actions: PropTypes.object.isRequired,
   games: PropTypes.array
 }
 
-GameDetail.defaultProps = {
+GameList.defaultProps = {
   games: []
 }
 
@@ -65,4 +65,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(GameList)
