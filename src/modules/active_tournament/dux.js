@@ -1,21 +1,21 @@
 const TOURNAMENT_CHANGE = 'tournament/CHANGE'
 
 const initialState = {
-  tournamentId: '',
+  tournament: {},
 }
 
 function reduceChangeTournament(state = initialState, action) {
-  const { tournamentId } = action
+  const { tournament } = action
   return {
     ...state,
-    tournamentId
+    tournament
   }
 }
 
-function changeTournament(tournamentId) {
+function changeTournament(tournament) {
   return {
     type: TOURNAMENT_CHANGE,
-    tournamentId
+    tournament
   }
 }
 
