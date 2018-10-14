@@ -41,7 +41,7 @@ class GameDetail extends PureComponent {
 
   componentDidMount() {
     this.props.actions.fetchGame(this.props.gameId)
-    this.props.actions.fetchMatchesForGame(this.props.gameId)
+    this.props.actions.fetchMatchesForGame(this.props.tournamentId, this.props.gameId)
     this.props.actions.fetchPlayers(this.props.tournamentId)
   }
 
