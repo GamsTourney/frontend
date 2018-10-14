@@ -6,9 +6,11 @@ import { values } from 'lodash/object'
 import { chunk } from 'lodash/array'
 import { Grid, Col, Row } from 'react-bootstrap'
 
-import GameCard from '../components/card'
+import { selectTournamentId } from 'modules/tournaments/selectors'
 import { selectGames } from 'selectors/collections'
+import GameCard from '../components/card'
 import { fetchGames } from '../actions'
+
 
 const GameRow = ({ row }) => (
   row.map((game) => (
@@ -26,7 +28,7 @@ const GameCards = ({ games, columns = 2 }) => {
 class GameList extends PureComponent {
 
   componentDidMount() {
-    this.props.actions.fetchGames()
+    this.props.actions.fetchGames(this.props.tournamentId)
   }
 
   render() {
@@ -44,6 +46,7 @@ class GameList extends PureComponent {
 
 GameList.propTypes = {
   actions: PropTypes.object.isRequired,
+  tournamentId: PropTypes.string.isRequired,
   games: PropTypes.array
 }
 
@@ -53,6 +56,7 @@ GameList.defaultProps = {
 
 function mapStateToProps(state) {
   return {
+    tournamentId: selectTournamentId(state),
     games: values(selectGames(state))
   }
 }

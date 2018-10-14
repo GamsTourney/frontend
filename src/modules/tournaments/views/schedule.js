@@ -15,7 +15,7 @@ class TournamentSchedule extends PureComponent {
 
   componentWillMount() {
     this.props.actions.fetchMatches(this.props.tournamentId)
-    this.props.actions.fetchGames()
+    this.props.actions.fetchGames(this.props.tournamentId)
     this.props.actions.fetchPlayers(this.props.tournamentId)
   }
 

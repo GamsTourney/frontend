@@ -1,11 +1,11 @@
 import { request } from "../../actions/api"
 
-function fetchGames() {
-  return request('games', '/games?include=scores')
+function fetchGames(tournamentId) {
+  return request('games', `/tournaments/${tournamentId}/games?include=scores`)
 }
 
-function fetchMatchesForGame(id) {
-  return request('matches', `/games/${id}/matches?include=results`)
+function fetchMatchesForGame(tournamentId, id) {
+  return request('matches', `/tournaments/${tournamentId}/games/${id}/matches?include=results`)
 }
 
 function fetchGame(id) {

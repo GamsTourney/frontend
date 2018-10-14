@@ -46,7 +46,7 @@ class TournamentLive extends PureComponent {
   componentWillMount() {
     this.fetchMatchData()
     this.props.actions.fetchPlayers(this.props.tournamentId)
-    this.props.actions.fetchGames()
+    this.props.actions.fetchGames(this.props.tournamentId)
   }
 
   componentWillUnmount() {
