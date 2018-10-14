@@ -8,8 +8,7 @@ import {
   selectGames
 } from 'selectors/collections'
 
-// TODO: 1 is only here as a hack until tournament selector is implemented
-const selectTournamentId = (state, props) => get(props, 'match.params.id') || get(props, 'tournamentId') || '1'
+const selectTournamentId = (state, props) => get(state, 'activeTournament.id') || get(props, 'tournamentId') || '1'
 
 const selectTournament = createSelector(
   selectTournaments,

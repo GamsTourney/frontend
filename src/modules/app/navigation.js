@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
-import { Navbar, Nav, NavItem, Image, DropdownButton, MenuItem } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
+import {
+  Navbar,
+  Nav,
+  NavItem,
+  Image
+} from 'react-bootstrap'
+import TournamentDropdown from 'modules/tournaments/components/dropdown'
 
 class Navigation extends Component {
   render() {
@@ -17,12 +23,7 @@ class Navigation extends Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav pullRight>
-            <DropdownButton title={'Select Tournament'}>
-              <MenuItem eventKey="1" active>Gams 2018</MenuItem>
-              <MenuItem eventKey="2">Gams 2019</MenuItem>
-            </DropdownButton>
-          </Nav>
+          <TournamentDropdown />
           <Nav>
             <LinkContainer to='/tournaments/1/live'>
               <NavItem>Live</NavItem>
