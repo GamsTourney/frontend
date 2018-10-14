@@ -7,7 +7,7 @@ import { chunk } from 'lodash/array'
 import { Grid, Col, Row } from 'react-bootstrap'
 
 import { selectTournamentId } from 'modules/tournaments/selectors'
-import { selectGames } from 'selectors/collections'
+import { selectGamesForTournament } from '../selectors'
 import GameCard from '../components/card'
 import { fetchGames } from '../actions'
 
@@ -55,9 +55,11 @@ GameList.defaultProps = {
 }
 
 function mapStateToProps(state) {
+  const tournamentId = selectTournamentId(state)
+
   return {
-    tournamentId: selectTournamentId(state),
-    games: values(selectGames(state))
+    tournamentId,
+    games: selectGamesForTournament(state, { tournamentId })
   }
 }
 
