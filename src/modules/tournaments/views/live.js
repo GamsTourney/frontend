@@ -110,7 +110,7 @@ class TournamentLive extends PureComponent {
 }
 
 TournamentLive.propTypes = {
-  tournamentId: PropTypes.string.isRequired,
+  tournamentId: PropTypes.number.isRequired,
   standings: PropTypes.array.isRequired
 }
 
