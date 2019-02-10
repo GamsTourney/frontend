@@ -62,7 +62,7 @@ class TournamentSchedule extends PureComponent {
 
 TournamentSchedule.propTypes = {
   actions: PropTypes.object.isRequired,
-  tournamentId: PropTypes.string.isRequired,
+  tournamentId: PropTypes.number.isRequired,
   timelineData: PropTypes.array
 }
 

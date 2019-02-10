@@ -2,12 +2,11 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { values } from 'lodash/object'
 import { chunk } from 'lodash/array'
 import { Grid, Col, Row } from 'react-bootstrap'
 
 import { selectTournamentId } from 'modules/tournaments/selectors'
-import { selectGames } from 'selectors/collections'
+import { selectGamesForTournament } from '../selectors'
 import GameCard from '../components/card'
 import { fetchGames } from '../actions'
 
@@ -46,7 +45,7 @@ class GameList extends PureComponent {
 
 GameList.propTypes = {
   actions: PropTypes.object.isRequired,
-  tournamentId: PropTypes.string.isRequired,
+  tournamentId: PropTypes.number.isRequired,
   games: PropTypes.array
 }
 
@@ -55,9 +54,11 @@ GameList.defaultProps = {
 }
 
 function mapStateToProps(state) {
+  const tournamentId = selectTournamentId(state)
+
   return {
-    tournamentId: selectTournamentId(state),
-    games: values(selectGames(state))
+    tournamentId,
+    games: selectGamesForTournament(state, { tournamentId })
   }
 }
 

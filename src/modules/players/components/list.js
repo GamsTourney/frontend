@@ -52,7 +52,7 @@ class PlayerList extends PureComponent {
 
 PlayerList.propTypes = {
   actions: PropTypes.object.isRequired,
-  tournamentId: PropTypes.string.isRequired,
+  tournamentId: PropTypes.number.isRequired,
   players: PropTypes.array
 }
 

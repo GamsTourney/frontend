@@ -84,7 +84,7 @@ class MatchScore extends PureComponent {
 
 MatchScore.propTypes = {
   actions: PropTypes.object.isRequired,
-  tournamentId: PropTypes.string.isRequired,
+  tournamentId: PropTypes.number.isRequired,
   matchData: PropTypes.object,
   players: PropTypes.array.isRequired,
   order: PropTypes.array.isRequired

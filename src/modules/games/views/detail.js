@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux'
 import { get } from 'lodash/object'
 import { Row, Col, Panel } from 'react-bootstrap'
 
-
 import GameCard from '../components/card'
 import MatchCard from 'modules/matches/components/match_card'
 import { fetchPlayers } from 'modules/players/actions'
@@ -69,7 +68,7 @@ class GameDetail extends PureComponent {
 
 GameDetail.propTypes = {
   actions: PropTypes.object.isRequired,
-  tournamentId: PropTypes.string.isRequired,
+  tournamentId: PropTypes.number.isRequired,
   game: PropTypes.object,
   matches: PropTypes.array.isRequired
 }

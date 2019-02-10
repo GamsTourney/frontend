@@ -1,4 +1,5 @@
 export default {
+  tournament: {},
   login: {},
   tournaments: {},
   players: {},
