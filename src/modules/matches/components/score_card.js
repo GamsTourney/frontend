@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Panel } from 'react-bootstrap'
 import PlayerAvatar from 'modules/players/components/avatar'
 
+import { COLOR_WHEEL } from 'constants/colors'
 import { selectPlayerResults } from '../selectors'
 
 class ScoreCard extends PureComponent {

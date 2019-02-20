@@ -17,7 +17,8 @@ import {
   selectMatchId,
   selectMatch,
   selectMatchPlayersWithResults,
-  selectMatchPlayerOrder
+  selectMatchPlayerOrder,
+  selectIsMatchTeamBased
 } from '../selectors'
 import { Button } from 'react-bootstrap'
 import '../styles.css'

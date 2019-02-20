@@ -9,21 +9,11 @@ import {
   Tooltip,
   Rectangle
 } from 'recharts'
-
-const COLORS = [
-  '#396AB1',
-  '#DA7C30',
-  '#3E9651',
-  '#ef9a9a',
-  '#535154',
-  '#6B4C9A',
-  '#922428',
-  '#FBC02D'
-]
+import { COLOR_WHEEL } from 'constants/colors'
 
 const RainbowBar = (props) => {
   const { index } = props
-  return <Rectangle {...props} fill={COLORS[index]} />
+  return <Rectangle {...props} fill={COLOR_WHEEL[index]} />
 }
 
 class TournamentStandings extends PureComponent {

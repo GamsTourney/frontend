@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { get } from 'lodash/object'
-import { filter, find, keyBy, orderBy, map } from 'lodash/collection'
+import { filter, find, keyBy, orderBy, map, some } from 'lodash/collection'
 import { selectMatches, selectMatchCompetitors, selectPlayers } from 'selectors/collections'
 
 const selectMatchId = (state, props) => get(props, 'match.params.id') || props.matchId
@@ -12,13 +12,21 @@ const selectMatch = createSelector(
   (matches, matchId) => matches[matchId] || {}
 )
 
-const selectMatchPlayers = createSelector(
+const selectMatchMatchCompetitors = createSelector(
   selectMatchId,
   selectMatchCompetitors,
+  (matchId, matchCompetitors) => filter(matchCompetitors, rc => Number(rc.match_id) === Number(matchId))
+)
+
+const selectMatchPlayers = createSelector(
+  selectMatchMatchCompetitors,
   selectPlayers,
-  (matchId, matchCompetitors, players) => {
-    const competitors = filter(matchCompetitors, rc => Number(rc.match_id) === Number(matchId))
-    return competitors.map(mc => players[mc.player_id])
+  (competitors, players) => {
+    return competitors.map(mc => {
+      const player = players[mc.player_id] || {}
+      player.team = mc.team
+      return player
+    })
   }
 )
 
@@ -39,7 +47,7 @@ const selectMatchPlayersWithResults = createSelector(
   (players, results) => {
     const playerResults = keyBy(results, 'player_id')
     players.forEach(player => player.results = playerResults[player.id] || {})
-    return orderBy(players, player => player.results.position)
+    return orderBy(players, player => -player.results.points)
   }
 )
 
@@ -48,11 +56,17 @@ const selectMatchPlayerOrder = createSelector(
   players => map(players, player => `${player.id}`)
 )
 
+const selectIsMatchTeamBased = createSelector(
+  selectMatchMatchCompetitors,
+  (matchCompetitors) => some(matchCompetitors, mc => !!mc.team)
+)
+
 export {
   selectMatchId,
   selectMatch,
   selectMatchPlayers,
   selectPlayerResults,
   selectMatchPlayersWithResults,
-  selectMatchPlayerOrder
+  selectMatchPlayerOrder,
+  selectIsMatchTeamBased
 }
