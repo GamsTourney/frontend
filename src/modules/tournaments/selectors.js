@@ -3,12 +3,16 @@ import { get } from 'lodash/object'
 import { filter, find, orderBy } from 'lodash/collection'
 import {
   selectMatches,
+  selectMatchCompetitors,
   selectTournaments,
   selectPlayers,
   selectGames
 } from 'selectors/collections'
 
-const selectTournamentId = (state, props) => get(state, 'activeTournament.id') || get(props, 'tournamentId') || 2
+const selectTournamentId = (state, props) =>
+  get(state, 'activeTournament.id') ||
+  get(props, 'tournamentId') ||
+  1
 
 const selectTournament = createSelector(
   selectTournaments,
@@ -58,15 +62,20 @@ const selectUpcomingMatches = createSelector(
 
 const selectTournamentMatchesByPlayer = createSelector(
   selectTournamentMatches,
-  (matches) => {
+  selectMatchCompetitors,
+  (matches, matchCompetitors) => {
     const schedule = {}
     matches.forEach((match) => {
-      const { player_ids } = match
-      player_ids.forEach((player) => {
-        if (schedule[player]) {
-          schedule[player].push(match)
+      const competitors = filter(matchCompetitors, mc =>
+        `${mc.match_id}` === `${match.id}`
+      )
+      competitors.forEach((competitor) => {
+        const { player_id, team } = competitor
+        const playerMatch = { team, ...match }
+        if (schedule[player_id]) {
+          schedule[player_id].push(playerMatch)
         } else {
-          schedule[player] = [match]
+          schedule[player_id] = [playerMatch]
         }
       })
     })
@@ -85,9 +94,10 @@ const selectTimelineData = createSelector(
       playerMatches[playerId].forEach((match) => {
         if (!match.hidden) {
           const game = find(games, game => `${game.id}` === `${match.game_id}`) || {}
+          const gameName = match.team ? `${game.name} (Team ${match.team})` : game.name
           const row = [
             player.name,
-            game.name,
+            gameName,
             new Date(match.start_time),
             new Date(match.end_time)
           ]

@@ -8,7 +8,7 @@ import GameScores from './scores'
 class GameCard extends PureComponent {
 
   render() {
-    const { game } = this.props
+    const { game, tournamentId } = this.props
 
     return (
       <Panel bsStyle="primary">
@@ -16,7 +16,7 @@ class GameCard extends PureComponent {
           <Panel.Body>
             <Row>
               <Col xs={12} md={7}>
-                <LinkContainer to={`/games/${game.id}`}>
+                <LinkContainer to={`/tournaments/${tournamentId}/games/${game.id}`}>
                   <Image className='game-avatar' src={game.img_url} />
                 </LinkContainer>
               </Col>
@@ -32,7 +32,8 @@ class GameCard extends PureComponent {
 }
 
 GameCard.propTypes = {
-  game: PropTypes.object
+  game: PropTypes.object,
+  tournamentId: PropTypes.number.isRequired
 }
 
 GameCard.defaultProps = {

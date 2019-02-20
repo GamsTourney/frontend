@@ -17,8 +17,7 @@ import {
   selectMatchId,
   selectMatch,
   selectMatchPlayersWithResults,
-  selectMatchPlayerOrder,
-  selectIsMatchTeamBased
+  selectMatchPlayerOrder
 } from '../selectors'
 import { Button } from 'react-bootstrap'
 import '../styles.css'
@@ -77,7 +76,7 @@ class MatchScore extends PureComponent {
         </Sortable>
         <Button
           type='submit'
-          bsStyle={ matchData.completed ? 'success' : 'primary' }
+          variant={ matchData.completed ? 'success' : 'primary' }
           className='pull-right'
           onClick={this.handleSubmit}
         >

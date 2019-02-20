@@ -5,5 +5,5 @@ const tournament_root = '/tournaments'
 const root = '/games'
 export default {
   [tournament_root + '/:id' + root]: { component: GameList },
-  [root + '/:id']: { component: GameDetail }
+  [tournament_root + '/:tournamentId' + root + '/:id']: { component: GameDetail }
 }

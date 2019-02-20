@@ -8,7 +8,7 @@ import { Row, Col, Panel } from 'react-bootstrap'
 import GameCard from '../components/card'
 import MatchCard from 'modules/matches/components/match_card'
 import { fetchPlayers } from 'modules/players/actions'
-import { selectTournamentId } from 'modules/tournaments/selectors'
+import { fetchMatchCompetitorsForTournament } from 'modules/matches/actions'
 import { selectGame, selectMatchesForGame } from '../selectors'
 import { fetchGame, fetchMatchesForGame } from '../actions'
 import { chunk } from "lodash/array"
@@ -39,9 +39,11 @@ const MatchCards = ({ matches, columns = 3 }) => {
 class GameDetail extends PureComponent {
 
   componentDidMount() {
-    this.props.actions.fetchGame(this.props.gameId)
-    this.props.actions.fetchMatchesForGame(this.props.tournamentId, this.props.gameId)
-    this.props.actions.fetchPlayers(this.props.tournamentId)
+    const { gameId, tournamentId } = this.props
+    this.props.actions.fetchGame(gameId)
+    this.props.actions.fetchMatchesForGame(tournamentId, gameId)
+    this.props.actions.fetchMatchCompetitorsForTournament(tournamentId)
+    this.props.actions.fetchPlayers(tournamentId)
   }
 
   render() {
@@ -79,7 +81,7 @@ GameDetail.defaultProps = {
 
 function mapStateToProps(state, props) {
   const gameId = Number(get(props, 'match.params.id'))
-  const tournamentId = selectTournamentId(state)
+  const tournamentId = Number(get(props, 'match.params.tournamentId'))
 
   return {
     tournamentId,
@@ -94,6 +96,7 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators({
       fetchGame,
       fetchMatchesForGame,
+      fetchMatchCompetitorsForTournament,
       fetchPlayers
     }, dispatch)
   }

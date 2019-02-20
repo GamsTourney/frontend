@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { Chart } from 'react-google-charts'
 import { Panel, Glyphicon } from 'react-bootstrap'
 
-import { fetchMatches } from 'modules/matches/actions'
+import { fetchMatches, fetchMatchCompetitorsForTournament } from 'modules/matches/actions'
 import { fetchPlayers } from 'modules/players/actions'
 import { fetchGames } from 'modules/games/actions'
 import { selectTournamentId } from 'modules/tournaments/selectors'
@@ -14,9 +14,11 @@ import { selectTimelineData } from '../selectors'
 class TournamentSchedule extends PureComponent {
 
   componentWillMount() {
-    this.props.actions.fetchMatches(this.props.tournamentId)
-    this.props.actions.fetchGames(this.props.tournamentId)
-    this.props.actions.fetchPlayers(this.props.tournamentId)
+    const { tournamentId } = this.props
+    this.props.actions.fetchMatches(tournamentId)
+    this.props.actions.fetchMatchCompetitorsForTournament(tournamentId)
+    this.props.actions.fetchGames(tournamentId)
+    this.props.actions.fetchPlayers(tournamentId)
   }
 
   render() {
@@ -72,7 +74,7 @@ TournamentSchedule.defaultProps = {
 
 function mapStateToProps(state, props) {
   return {
-    tournamentId: selectTournamentId(state),
+    tournamentId: selectTournamentId(state, props),
     timelineData: selectTimelineData(state, props)
   }
 }
@@ -80,9 +82,10 @@ function mapStateToProps(state, props) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      fetchMatches,
       fetchPlayers,
-      fetchGames
+      fetchGames,
+      fetchMatches,
+      fetchMatchCompetitorsForTournament
     }, dispatch)
   }
 }

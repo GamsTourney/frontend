@@ -7,13 +7,26 @@ import PlayerAvatar from 'modules/players/components/avatar'
 import { COLOR_WHEEL } from 'constants/colors'
 import { selectPlayerResults } from '../selectors'
 
+const generateStyle = (player) => {
+  const style = {}
+  const { team } = player
+  if (team) {
+    style.borderLeft = `7px solid ${COLOR_WHEEL[team]}`
+  }
+  return style
+}
+
 class ScoreCard extends PureComponent {
 
   render() {
     const { player, results } = this.props
 
     return (
-      <Panel player={player.id} className='score-card'>
+      <Panel
+        player={player.id}
+        className='score-card'
+        style={generateStyle(player)}
+      >
         <PlayerAvatar
           key={player.id}
           className='player-avatar'

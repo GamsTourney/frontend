@@ -11,17 +11,25 @@ import GameCard from '../components/card'
 import { fetchGames } from '../actions'
 
 
-const GameRow = ({ row }) => (
+const GameRow = ({ tournamentId, row }) => (
   row.map((game) => (
     <Col key={game.id} md={6} xs={12}>
-      <GameCard style={{ height: '100%' }} game={game}/>
+      <GameCard
+        style={{ height: '100%' }}
+        tournamentId={tournamentId}
+        game={game}
+      />
     </Col>
   ))
 )
 
-const GameCards = ({ games, columns = 2 }) => {
+const GameCards = ({ tournamentId, games, columns = 2 }) => {
   const rows = chunk(games, 2)
-  return rows.map((row, idx) => <Row key={idx}><GameRow row={row}/></Row>)
+  return rows.map((row, idx) => (
+    <Row key={idx}>
+      <GameRow tournamentId={tournamentId} row={row}/>
+    </Row>
+  ))
 }
 
 class GameList extends PureComponent {
@@ -31,14 +39,14 @@ class GameList extends PureComponent {
   }
 
   render() {
-    const { games } = this.props
+    const { games, tournamentId } = this.props
 
     if (games.length <= 0) {
       return null
     }
 
     return (
-      <Grid><GameCards games={games} /></Grid>
+      <Grid><GameCards tournamentId={tournamentId} games={games} /></Grid>
     )
   }
 }

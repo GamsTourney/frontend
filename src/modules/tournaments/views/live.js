@@ -7,7 +7,7 @@ import { chunk } from 'lodash/array'
 
 import { fetchPlayers } from 'modules/players/actions'
 import { fetchGames } from 'modules/games/actions'
-import { fetchMatches } from 'modules/matches/actions'
+import { fetchMatches, fetchMatchCompetitorsForTournament } from 'modules/matches/actions'
 import MatchCard from 'modules/matches/components/match_card'
 import { fetchTournament } from '../actions'
 import {
@@ -58,6 +58,7 @@ class TournamentLive extends PureComponent {
   fetchMatchData = () => {
     this.props.actions.fetchMatches(this.props.tournamentId)
     this.props.actions.fetchTournament(this.props.tournamentId)
+    this.props.actions.fetchMatchCompetitorsForTournament(this.props.tournamentId)
     this.timeout = setTimeout(() => {
       this.fetchMatchData()
     }, REFRESH_INTERVAL)
@@ -133,7 +134,8 @@ function mapDispatchToProps(dispatch) {
       fetchTournament,
       fetchPlayers,
       fetchGames,
-      fetchMatches
+      fetchMatches,
+      fetchMatchCompetitorsForTournament
     }, dispatch)
   }
 }
