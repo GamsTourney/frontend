@@ -4,6 +4,10 @@ function fetchMatch(id) {
   return request('matches', `/matches/${id}?include=players,results`)
 }
 
+function fetchMatchCompetitors(id) {
+  return request('match_competitors', `/matches/${id}/match_competitors`)
+}
+
 function fetchMatches(tournamentId) {
   return request('matches', `/tournaments/${tournamentId}/matches`)
 }
@@ -22,6 +26,7 @@ function postScores(id, order) {
 
 export {
   fetchMatch,
+  fetchMatchCompetitors,
   fetchMatches,
   postScores
 }

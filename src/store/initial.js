@@ -4,5 +4,6 @@ export default {
   tournaments: {},
   players: {},
   games: {},
-  matches: {}
+  matches: {},
+  match_competitors: {}
 }

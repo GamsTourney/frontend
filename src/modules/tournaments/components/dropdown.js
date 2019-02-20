@@ -8,6 +8,9 @@ import { Nav, NavDropdown, MenuItem } from 'react-bootstrap'
 import { selectTournaments } from 'selectors/collections'
 import { fetchTournaments, changeActiveTournament } from '../actions'
 import { selectTournament } from '../selectors'
+import { getHistory } from 'routes/history'
+
+const history = getHistory()
 
 class TournamentDropdown extends PureComponent {
 
@@ -22,6 +25,7 @@ class TournamentDropdown extends PureComponent {
 
   handleSelect(e) {
     this.props.actions.changeActiveTournament(e)
+    history.push(`/tournaments/${e.id}/live`)
   }
 
   render() {

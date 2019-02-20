@@ -11,7 +11,8 @@ const reducer = combineReducers({
   tournaments: buildApiReducer('tournaments'),
   players: buildApiReducer('players'),
   games: buildApiReducer('games'),
-  matches: buildApiReducer('matches')
+  matches: buildApiReducer('matches'),
+  matchCompetitors: buildApiReducer('match_competitors')
 })
 
 export default reducer

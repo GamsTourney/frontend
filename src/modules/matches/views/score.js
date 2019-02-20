@@ -8,7 +8,11 @@ import Sortable from 'react-sortablejs'
 import ScoreCard from '../components/score_card'
 import { selectTournamentId } from 'modules/tournaments/selectors'
 import { fetchPlayers } from 'modules/players/actions'
-import { fetchMatch, postScores } from '../actions'
+import {
+  fetchMatch,
+  fetchMatchCompetitors,
+  postScores
+} from '../actions'
 import {
   selectMatchId,
   selectMatch,
@@ -38,6 +42,7 @@ class MatchScore extends PureComponent {
   componentDidMount() {
     const { matchId, tournamentId } = this.props
     this.props.actions.fetchMatch(matchId)
+    this.props.actions.fetchMatchCompetitors(matchId)
     this.props.actions.fetchPlayers(tournamentId)
   }
 
@@ -108,6 +113,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       fetchMatch,
+      fetchMatchCompetitors,
       fetchPlayers,
       postScores
     }, dispatch)
