@@ -10,7 +10,7 @@ import { selectPlayerResults } from '../selectors'
 const generateStyle = (player) => {
   const style = {}
   const { team } = player
-  if (team) {
+  if (team !== null) {
     style.borderLeft = `7px solid ${COLOR_WHEEL[team]}`
   }
   return style

@@ -12,7 +12,7 @@ import {
 const selectTournamentId = (state, props) =>
   get(state, 'activeTournament.id') ||
   get(props, 'tournamentId') ||
-  1
+  2
 
 const selectTournament = createSelector(
   selectTournaments,
@@ -94,7 +94,7 @@ const selectTimelineData = createSelector(
       playerMatches[playerId].forEach((match) => {
         if (!match.hidden) {
           const game = find(games, game => `${game.id}` === `${match.game_id}`) || {}
-          const gameName = match.team ? `${game.name} (Team ${match.team})` : game.name
+          const gameName = match.team !== null ? `${game.name} (Team ${match.team + 1})` : game.name
           const row = [
             player.name,
             gameName,
