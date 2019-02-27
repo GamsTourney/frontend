@@ -9,6 +9,17 @@ import {
   selectGames
 } from 'selectors/collections'
 
+const getGameName = (match, game) => {
+  const { team, group_id } = match
+  let gameName = game.name
+  if (team !== null) {
+    gameName += ` (Team ${team + 1})`
+  } else if (group_id !== null) {
+    gameName += ` (Group ${group_id + 1})`
+  }
+  return gameName
+}
+
 const selectTournamentId = (state, props) =>
   get(state, 'activeTournament.id') ||
   get(props, 'tournamentId') ||
@@ -94,10 +105,9 @@ const selectTimelineData = createSelector(
       playerMatches[playerId].forEach((match) => {
         if (!match.hidden) {
           const game = find(games, game => `${game.id}` === `${match.game_id}`) || {}
-          const gameName = match.team !== null ? `${game.name} (Team ${match.team + 1})` : game.name
           const row = [
             player.name,
-            gameName,
+            getGameName(match, game),
             new Date(match.start_time),
             new Date(match.end_time)
           ]

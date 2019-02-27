@@ -5,7 +5,7 @@ function fetchPlayers(tournamentId) {
 }
 
 function fetchPlayer(id) {
-  return request('players', `/players/${id}?include=matches`)
+  return request('players', `/players/${id}`)
 }
 
 export {
