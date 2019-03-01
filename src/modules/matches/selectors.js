@@ -25,6 +25,7 @@ const selectMatchPlayers = createSelector(
     return competitors.map(mc => {
       const player = players[mc.player_id] || {}
       player.team = mc.team
+      player.match_competitor_id = mc.id
       return player
     })
   }
@@ -51,9 +52,9 @@ const selectMatchPlayersWithResults = createSelector(
   }
 )
 
-const selectMatchPlayerOrder = createSelector(
+const selectMatchComepetitorOrder = createSelector(
   selectMatchPlayersWithResults,
-  players => map(players, player => `${player.id}`)
+  players => map(players, player => `${player.match_competitor_id}`)
 )
 
 const selectIsMatchTeamBased = createSelector(
@@ -67,6 +68,6 @@ export {
   selectMatchPlayers,
   selectPlayerResults,
   selectMatchPlayersWithResults,
-  selectMatchPlayerOrder,
+  selectMatchComepetitorOrder,
   selectIsMatchTeamBased
 }

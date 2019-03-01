@@ -12,8 +12,13 @@ function fetchGame(id) {
   return request('games', `/games/${id}?include=scores`)
 }
 
+function fetchGameScores(id) {
+  return request('scores', `/games/${id}/scores`)
+}
+
 export {
   fetchGame,
   fetchGames,
-  fetchMatchesForGame
+  fetchMatchesForGame,
+  fetchGameScores
 }

@@ -24,6 +24,7 @@ class ScoreCard extends PureComponent {
     return (
       <Panel
         player={player.id}
+        mc={player.match_competitor_id}
         className='score-card'
         style={generateStyle(player)}
       >

@@ -17,9 +17,9 @@ function fetchMatchCompetitorsForTournament(tournamentId) {
 }
 
 
-function postScores(id, order) {
+function postScores(id, scores) {
   const data = new FormData()
-  data.append('order', order)
+  data.append('scores', JSON.stringify(scores))
   return request(
     'matches',
     `/matches/${id}/score`,

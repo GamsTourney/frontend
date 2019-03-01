@@ -3,9 +3,11 @@ import { get } from 'lodash/object'
 import { filter } from 'lodash/collection'
 import {
   selectMatches,
-  selectGames
+  selectGames,
+  selectScores
 } from 'selectors/collections'
 import { selectTournamentId } from 'modules/tournaments/selectors'
+import { orderBy, map } from 'lodash/collection'
 
 const selectGameId = (state, props) => get(props, 'match.params.id') || props.gameId
 
@@ -27,8 +29,21 @@ const selectMatchesForGame = createSelector(
   (matches, gameId) => filter(matches, match => `${match.game_id}` === `${gameId}`)
 )
 
+const selectGameScores = createSelector(
+  selectScores,
+  selectGameId,
+  (scores, gameId) => filter(scores, score => `${score.game_id}` === `${gameId}`)
+)
+
+const selectGameScoreRankList = createSelector(
+  selectGameScores,
+  (scores) => map(orderBy(scores, 'position'), 'value')
+)
+
 export {
   selectGame,
   selectGamesForTournament,
-  selectMatchesForGame
+  selectMatchesForGame,
+  selectGameScores,
+  selectGameScoreRankList
 }

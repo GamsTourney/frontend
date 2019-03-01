@@ -47,7 +47,7 @@ class GameDetail extends PureComponent {
   }
 
   render() {
-    const { game, matches } = this.props
+    const { game, matches, tournamentId } = this.props
 
     if(!game) {
       return null
@@ -55,7 +55,7 @@ class GameDetail extends PureComponent {
 
     return (
       <Fragment>
-        <GameCard game={game} />
+        <GameCard tournamentId={tournamentId} game={game} />
         <Panel bsStyle="primary">
           <Panel.Heading>Matches</Panel.Heading>
           <Panel.Body>
