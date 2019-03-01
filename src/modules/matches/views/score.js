@@ -58,12 +58,12 @@ class MatchScore extends PureComponent {
   }
 
   render() {
-    const { matchId, matchData, players } = this.props
+    const { tournamentId, matchId, matchData, players } = this.props
     const game = matchData.game || {}
 
     return (
       <div className='score-sorter'>
-        <Link to={`/games/${game.id}`}>
+        <Link to={`/tournaments/${tournamentId}/games/${game.id}`}>
           <h4>{game.name}</h4>
         </Link>
         <Sortable
