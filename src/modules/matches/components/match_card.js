@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { Panel } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import moment from 'moment'
+import maxBy from 'lodash/maxBy'
+import get from 'lodash/get'
 
 import PlayerAvatar from 'modules/players/components/avatar'
 import { selectMatchPlayersWithResults } from '../selectors'
@@ -25,8 +27,9 @@ class MatchCard extends PureComponent {
   }
 
   render() {
-    const { matchData } = this.props
+    const { matchData, players } = this.props
     const className = matchData.completed ? 'match-card-completed' : 'match-card'
+    const topPlayer = maxBy(players, (p) => get(p, 'results.points'))
 
     return (
       <Panel className={className}>
@@ -34,9 +37,11 @@ class MatchCard extends PureComponent {
           <Panel.Body>
             <h6 style={{ marginTop: '0px' }}>{this.renderHeader()}</h6>
             {
-              this.props.players.map((player, idx) => {
-                const winner = idx === 0 && matchData.completed
+              players.map((player, idx) => {
                 if (!player.id) { return null }
+                const points = get(player, 'results.points')
+                const topPoints = get(topPlayer, 'results.points')
+                const winner = points === topPoints && matchData.completed
                 return (
                   <PlayerAvatar
                     key={player.id}

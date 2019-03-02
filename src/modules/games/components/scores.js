@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { ButtonGroup, Button } from 'react-bootstrap'
+import isEmpty from 'lodash/isEmpty'
 
 class GameScores extends PureComponent {
 
@@ -9,11 +10,13 @@ class GameScores extends PureComponent {
     const scores = game.scores || []
 
     return (
+      isEmpty(scores) ?
+      'Manual' :
       <ButtonGroup
         className='score-list'
         bsSize='xsmall'
       >
-        { scores.map((score) => <Button key={score.id}>{score.value}</Button>) }
+        {scores.map((score) => <Button key={score.id}>{score.value}</Button>)}
       </ButtonGroup>
     )
   }
