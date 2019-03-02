@@ -36,6 +36,7 @@ class MatchCard extends PureComponent {
             {
               this.props.players.map((player, idx) => {
                 const winner = idx === 0 && matchData.completed
+                if (!player.id) { return null }
                 return (
                   <PlayerAvatar
                     key={player.id}

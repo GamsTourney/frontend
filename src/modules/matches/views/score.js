@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import isEmpty from 'lodash/isEmpty'
 
 import MatchRankScore from '../components/score/rank'
+import MatchManualScore from '../components/score/manual'
 import { fetchMatch } from '../actions'
 import {
   selectMatchId,
@@ -30,7 +31,7 @@ class MatchScore extends PureComponent {
     return (
       match.score_type === SCORE_TYPES.RANK ?
       <MatchRankScore match={match} /> :
-      <div>TODO</div>
+      <MatchManualScore match={match} />
     )
   }
 }

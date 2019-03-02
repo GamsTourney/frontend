@@ -3,7 +3,7 @@
   padding-bottom: 10px;
 }
 
-.score-card {
+.score-sorter .score-card {
   cursor: pointer;
 }
 
@@ -12,6 +12,17 @@
   padding-right: 18px;
   display: inline-block;
   vertical-align: top;
+}
+
+.point-editor {
+  float: right;
+  padding: 15px;
+  display: flex;
+}
+
+.point-editor-number {
+  padding: 0 10px;
+  font-size: 20px;
 }
 
 .score-card-player-details {
