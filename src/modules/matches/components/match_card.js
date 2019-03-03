@@ -9,6 +9,16 @@ import get from 'lodash/get'
 
 import PlayerAvatar from 'modules/players/components/avatar'
 import { selectMatchPlayersWithResults } from '../selectors'
+import { COLOR_WHEEL } from 'constants/colors'
+
+const generateBorderStyle = (player) => {
+  let border
+  if (player.team !== null) {
+    border = `3px solid ${COLOR_WHEEL[player.team]}`
+  }
+  console.log(border)
+  return border
+}
 
 class MatchCard extends PureComponent {
 
@@ -54,7 +64,8 @@ class MatchCard extends PureComponent {
                     style={{
                       width: '35px',
                       marginRight: '6px',
-                      marginBottom: '6px'
+                      marginBottom: '6px',
+                      border: generateBorderStyle(player)
                     }}
                     circle
                     winner={winner ? 'true' : undefined}
