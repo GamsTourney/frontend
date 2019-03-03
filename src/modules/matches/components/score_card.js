@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Row, Col, Panel, Button, Glyphicon } from 'react-bootstrap'
+import { Panel, Button, Glyphicon } from 'react-bootstrap'
 
 import PlayerAvatar from 'modules/players/components/avatar'
 import { COLOR_WHEEL } from 'constants/colors'
@@ -44,24 +44,16 @@ class ScoreCard extends PureComponent {
         className='score-card'
         style={generateStyle(player)}
       >
-        <Row>
-          <Col xs={2} md={1}>
-            <PlayerAvatar
-              key={player.id}
-              className='player-avatar'
-              player={player}
-              size='medium'
-            />
-          </Col>
-          <Col xs={8} md={9}>
-            <h4>{player.name}</h4>
-            <div>
-              Points: {results.points || 0}
-            </div>
-          </Col>
-          <Col xs={2}>
+        <PlayerAvatar
+          key={player.id}
+          className='player-avatar'
+          player={player}
+          size='medium'
+        />
+        <div className='score-card-player-details'>
+          <span className='player-name'>{player.name}</span>
           {
-            showPointEditor &&
+            showPointEditor ?
             <div className='point-editor'>
               <Button onClick={() => this.handleAddPoint(-1)} bsSize="small" bsStyle="danger">
                 <Glyphicon glyph="minus" />
@@ -70,10 +62,10 @@ class ScoreCard extends PureComponent {
               <Button onClick={() => this.handleAddPoint(1)} bsSize="small" bsStyle="success">
                 <Glyphicon glyph="plus" />
               </Button>
-            </div>
+            </div> :
+            <div className='point-display'>Points: {results.points || 0}</div>
           }
-          </Col>
-        </Row>
+        </div>
       </Panel>
     )
   }

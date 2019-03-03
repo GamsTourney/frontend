@@ -1,6 +1,6 @@
 .score-sorter > a > h4 {
   text-align: center;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 }
 
 .score-sorter .score-card {
@@ -15,8 +15,7 @@
 }
 
 .point-editor {
-  float: right;
-  padding: 15px;
+  margin: 0px 5px;
   display: flex;
 }
 
@@ -25,9 +24,17 @@
   font-size: 20px;
 }
 
-.score-card-player-details > h4 {
-  padding: 10px 0;
-  margin: 0;
+.score-card-player-details {
+  display: inline-block;
+}
+
+.score-card-player-details > .player-name {
+  font-size: 20px;
+  margin: 5px;
+}
+
+.score-card-player-details > .point-display {
+  margin: 0px 5px;
 }
 
 .match-card-completed {
