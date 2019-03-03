@@ -25,10 +25,6 @@
   font-size: 20px;
 }
 
-.score-card-player-details {
-  display: inline-block;
-}
-
 .score-card-player-details > h4 {
   padding: 10px 0;
   margin: 0;
