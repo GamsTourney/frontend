@@ -15,7 +15,7 @@ const stylesheets = [
 class App extends Component {
 
   componentDidMount() {
-    document.title = "Gams 2018"
+    document.title = "Gams"
   }
 
   render() {
