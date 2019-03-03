@@ -14,13 +14,17 @@ class MatchCard extends PureComponent {
 
   renderHeader() {
     const { matchData, displayAttribute } = this.props
-    const { game } = matchData
+    const { game, group_id: groupId } = matchData
 
     switch(displayAttribute) {
       case 'game.name':
         return game.name
       case 'start_time':
-        return moment(matchData.start_time).format('h:mm A')
+        let timestamp = moment(matchData.start_time).format('h:mm A')
+        if (groupId !== null) {
+          timestamp += ` (Group ${groupId + 1})`
+        }
+        return timestamp
       default:
         return matchData[displayAttribute]
     }
