@@ -1,4 +1,4 @@
-const API_URL = process.env.API_URL || 'http://guts-dev.herokuapp.com'
+const API_URL = process.env.API_URL || 'https://guts-dev.herokuapp.com'
 const API_FETCH = 'API_FETCH'
 const API_RECEIVE = 'API_RECEIVE'
 
