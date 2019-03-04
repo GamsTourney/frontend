@@ -7,7 +7,7 @@ import Sortable from 'react-sortablejs'
 import { Button } from 'react-bootstrap'
 import get from 'lodash/get'
 
-import { selectTournamentId } from 'modules/tournaments/selectors'
+import { selectTournamentId, selectTournament } from 'modules/tournaments/selectors'
 import { selectGameScoreRankList } from 'modules/games/selectors'
 import { fetchPlayers } from 'modules/players/actions'
 import { fetchGameScores } from 'modules/games/actions'
@@ -55,7 +55,10 @@ class MatchRankScore extends PureComponent {
   }
 
   handleSubmit() {
-    const { match, scores } = this.props
+    const { tournament, match, scores } = this.props
+    if (tournament.locked) {
+      return false
+    }
     const order = this.state.order || this.props.order
     const scoreData = order.map((mc_id, idx) => ({
       match_competitor_id: mc_id,
@@ -66,8 +69,17 @@ class MatchRankScore extends PureComponent {
   }
 
   render() {
-    const { tournamentId, match, players } = this.props
+    const { tournamentId, tournament, match, players } = this.props
     const game = match.game || {}
+
+    let button = { style: 'success', text: 'Submit' }
+    if (tournament.locked) {
+      button.style = 'disabled'
+      button.text = 'Locked'
+    } else if (match.completed) {
+      button.style = 'primary'
+      button.text = 'Update'
+    }
 
     return (
       <div className='score-sorter'>
@@ -82,11 +94,12 @@ class MatchRankScore extends PureComponent {
         </Sortable>
         <Button
           type='submit'
-          bsStyle={ match.completed ? 'success' : 'primary' }
+          bsStyle={ button.style }
           className='pull-right'
           onClick={this.handleSubmit}
+          disabled={!!tournament.locked}
         >
-          { match.completed ? 'Update' : 'Submit' }
+          { button.text }
         </Button>
       </div>
     )
@@ -107,6 +120,7 @@ function mapStateToProps(state, props) {
 
   return {
     tournamentId: selectTournamentId(state),
+    tournament: selectTournament(state, { tournamentId: match.tournament_id }),
     players: selectMatchPlayersWithResults(state, { matchId: match.id }),
     order: selectMatchComepetitorOrder(state, { matchId: match.id }),
     scores: selectGameScoreRankList(state, { gameId: match.game_id })

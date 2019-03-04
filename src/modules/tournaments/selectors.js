@@ -22,8 +22,8 @@ const getGameName = (match, game) => {
 
 const selectTournamentId = (state, props) =>
   get(props, 'match.params.tournamentId') ||
-  get(state, 'activeTournament.id') ||
   get(props, 'tournamentId') ||
+  get(state, 'activeTournament.id') ||
   2
 
 const selectTournament = createSelector(

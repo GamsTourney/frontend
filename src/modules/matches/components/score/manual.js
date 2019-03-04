@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import get from 'lodash/get'
 
-import { selectTournamentId } from 'modules/tournaments/selectors'
+import { selectTournamentId, selectTournament } from 'modules/tournaments/selectors'
 import { selectGameScoreRankList } from 'modules/games/selectors'
 import { fetchPlayers } from 'modules/players/actions'
 import { fetchGameScores } from 'modules/games/actions'
@@ -22,14 +22,14 @@ import {
 } from '../../selectors'
 import '../../styles.css'
 
-const PlayerCards = ({ matchId, players }) => {
+const PlayerCards = ({ matchId, players, showPointEditor }) => {
   if (!get(players, '0.id')) { return null }
   return players.map(player => (
     <ScoreCard
       key={player.id}
       matchId={`${matchId}`}
       player={player}
-      showPointEditor
+      showPointEditor={showPointEditor}
     />
   ))
 }
@@ -44,7 +44,7 @@ class MatchManualScore extends PureComponent {
   }
 
   render() {
-    const { tournamentId, match, players } = this.props
+    const { tournament, tournamentId, match, players } = this.props
     const game = match.game || {}
 
     return (
@@ -52,7 +52,11 @@ class MatchManualScore extends PureComponent {
         <Link to={`/tournaments/${tournamentId}/games/${game.id}`}>
           <h4>{game.name}</h4>
         </Link>
-        <PlayerCards matchId={match.id} players={players}/>
+        <PlayerCards
+          matchId={match.id}
+          players={players}
+          showPointEditor={!tournament.locked}
+        />
       </div>
     )
   }
@@ -72,6 +76,7 @@ function mapStateToProps(state, props) {
 
   return {
     tournamentId: selectTournamentId(state),
+    tournament: selectTournament(state, { tournamentId: match.tournament_id }),
     players: selectMatchPlayersWithResults(state, { matchId: match.id }),
     order: selectMatchComepetitorOrder(state, { matchId: match.id }),
     scores: selectGameScoreRankList(state, { gameId: match.game_id })
