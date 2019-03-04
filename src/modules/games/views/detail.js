@@ -39,6 +39,7 @@ const MatchCards = ({ matches, columns = 3 }) => {
 class GameDetail extends PureComponent {
 
   componentDidMount() {
+    window.scrollTo(0, 0)
     const { gameId, tournamentId } = this.props
     this.props.actions.fetchGame(gameId)
     this.props.actions.fetchMatchesForGame(tournamentId, gameId)

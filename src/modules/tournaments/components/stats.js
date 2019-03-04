@@ -7,9 +7,9 @@ import { selectPlayersById } from 'modules/players/selectors'
 import PlayerAvatar from 'modules/players/components/avatar'
 
 const FRIENDLY_STAT_NAMES = {
-  most_second_places: 'Always the Bridesmaid',
   longest_streak: 'Hot Streak',
-  most_game_wins: 'Best Single Game'
+  point_grabber: 'Point Snatcher',
+  most_disappointing: 'Most Disappointing'
 }
 
 class TournamentStats extends PureComponent {
@@ -34,7 +34,7 @@ class TournamentStats extends PureComponent {
                   circle
                 />
                 <br />
-                <span>Count: {value}</span>
+                <span>Value: {value}</span>
                 {
                   game &&
                   <span><br />{game.name}</span>

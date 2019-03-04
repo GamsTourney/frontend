@@ -82,7 +82,7 @@ class MatchRankScore extends PureComponent {
         </Sortable>
         <Button
           type='submit'
-          variant={ match.completed ? 'success' : 'primary' }
+          bsStyle={ match.completed ? 'success' : 'primary' }
           className='pull-right'
           onClick={this.handleSubmit}
         >

@@ -9,3 +9,7 @@ img.game-avatar {
 .score-list {
   padding-left: 5px;
 }
+
+.game-card-header {
+  cursor: pointer;
+}

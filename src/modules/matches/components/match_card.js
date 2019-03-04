@@ -16,7 +16,6 @@ const generateBorderStyle = (player) => {
   if (player.team !== null) {
     border = `3px solid ${COLOR_WHEEL[player.team]}`
   }
-  console.log(border)
   return border
 }
 

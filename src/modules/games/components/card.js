@@ -12,20 +12,22 @@ class GameCard extends PureComponent {
 
     return (
       <Panel bsStyle="primary">
-        <Panel.Heading>{game.name}</Panel.Heading>
-          <Panel.Body>
-            <Row>
-              <Col xs={12} md={7}>
-                <LinkContainer to={`/tournaments/${tournamentId}/games/${game.id}`}>
-                  <Image className='game-avatar' src={game.img_url} />
-                </LinkContainer>
-              </Col>
-              <Col xs={12} md={5}>
-                <div>Players: {game.players}</div>
-                <div>Scoring: <GameScores game={game} /></div>
-              </Col>
-            </Row>
-          </Panel.Body>
+        <LinkContainer to={`/tournaments/${tournamentId}/games/${game.id}`}>
+          <Panel.Heading className='game-card-header'>{game.name}</Panel.Heading>
+        </LinkContainer>
+        <Panel.Body>
+          <Row>
+            <Col xs={12} md={7}>
+              <LinkContainer to={`/tournaments/${tournamentId}/games/${game.id}`}>
+                <Image className='game-avatar' src={game.img_url} />
+              </LinkContainer>
+            </Col>
+            <Col xs={12} md={5}>
+              <div>Players: {game.players}</div>
+              <div>Scoring: <GameScores game={game} /></div>
+            </Col>
+          </Row>
+        </Panel.Body>
       </Panel>
     )
   }

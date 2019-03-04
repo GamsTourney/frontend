@@ -44,9 +44,9 @@ const MatchCards = ({ matches, columns = 2 }) => {
 class TournamentLive extends PureComponent {
 
   componentWillMount() {
-    this.fetchMatchData()
     this.props.actions.fetchPlayers(this.props.tournamentId)
     this.props.actions.fetchGames(this.props.tournamentId)
+    this.fetchMatchData()
   }
 
   componentWillUnmount() {
