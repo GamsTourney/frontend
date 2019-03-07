@@ -1,4 +1,5 @@
 import { request } from "../../actions/api"
+import { GROUP_FILTER_CHANGE, GROUP_FILTER_CLEAR } from './dux'
 
 function fetchGames(tournamentId) {
   return request('games', `/tournaments/${tournamentId}/games?include=scores`)
@@ -16,9 +17,24 @@ function fetchGameScores(id) {
   return request('scores', `/games/${id}/scores`)
 }
 
+function clearGroupFilter(groupId, checked) {
+  return { type: GROUP_FILTER_CLEAR, groupId }
+}
+
+function updateGroupFilter(gameId, groupId, checked) {
+  return {
+    type: GROUP_FILTER_CHANGE,
+    gameId,
+    groupId,
+    checked
+  }
+}
+
 export {
   fetchGame,
   fetchGames,
   fetchMatchesForGame,
-  fetchGameScores
+  fetchGameScores,
+  clearGroupFilter,
+  updateGroupFilter
 }

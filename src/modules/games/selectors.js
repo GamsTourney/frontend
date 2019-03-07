@@ -8,8 +8,11 @@ import {
 } from 'selectors/collections'
 import { selectTournamentId } from 'modules/tournaments/selectors'
 import { orderBy, map } from 'lodash/collection'
+import isEmpty from 'lodash/isEmpty'
 
 const selectGameId = (state, props) => get(props, 'match.params.id') || props.gameId
+
+const selectMatchFilter = (state) => state.matchFilter
 
 const selectGame = createSelector(
   selectGames,
@@ -29,6 +32,19 @@ const selectMatchesForGame = createSelector(
   (matches, gameId) => filter(matches, match => `${match.game_id}` === `${gameId}`)
 )
 
+const selectFilteredMatchesForGame = createSelector(
+  selectMatchFilter,
+  selectGameId,
+  selectMatchesForGame,
+  (mf, gameId, matches) => {
+    const matchFilter = mf[gameId]
+    if (isEmpty(matchFilter)) {
+      return matches
+    }
+    return filter(matches, match => matchFilter[match.group_id])
+  }
+)
+
 const selectGameScores = createSelector(
   selectScores,
   selectGameId,
@@ -41,8 +57,10 @@ const selectGameScoreRankList = createSelector(
 )
 
 export {
+  selectFilteredMatchesForGame,
   selectGame,
   selectGamesForTournament,
+  selectMatchFilter,
   selectMatchesForGame,
   selectGameScores,
   selectGameScoreRankList

@@ -13,3 +13,7 @@ img.game-avatar {
 .game-card-header {
   cursor: pointer;
 }
+
+.group-filter-checkboxes {
+  text-align: right;
+}

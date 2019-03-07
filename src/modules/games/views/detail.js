@@ -3,14 +3,20 @@ import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/object'
-import { Row, Col, Panel } from 'react-bootstrap'
+import map from 'lodash/map'
+import uniq from 'lodash/uniq'
+import { Row, Col, Panel, FormGroup, Checkbox } from 'react-bootstrap'
 
 import GameCard from '../components/card'
 import MatchCard from 'modules/matches/components/match_card'
 import { fetchPlayers } from 'modules/players/actions'
 import { fetchMatchCompetitorsForTournament } from 'modules/matches/actions'
-import { selectGame, selectMatchesForGame } from '../selectors'
-import { fetchGame, fetchMatchesForGame } from '../actions'
+import {
+  selectFilteredMatchesForGame,
+  selectGame,
+  selectMatchesForGame
+} from '../selectors'
+import { clearGroupFilter, fetchGame, fetchMatchesForGame, updateGroupFilter } from '../actions'
 import { chunk } from "lodash/array"
 
 import '../styles.css'
@@ -36,6 +42,18 @@ const MatchCards = ({ matches, columns = 3 }) => {
   ))
 }
 
+const GroupCheckbox = ({ gameId, groupId, onClick }) => {
+  return (
+    <Checkbox
+      inline
+      style={{ paddingRight: '10px' }}
+      onClick={(e) => onClick(gameId, groupId, e.target.checked)}
+    >
+      Group {groupId + 1}
+    </Checkbox>
+  )
+}
+
 class GameDetail extends PureComponent {
 
   componentDidMount() {
@@ -48,7 +66,13 @@ class GameDetail extends PureComponent {
   }
 
   render() {
-    const { game, matches, tournamentId } = this.props
+    const {
+      actions,
+      game,
+      groupIds,
+      matches,
+      tournamentId
+    } = this.props
 
     if(!game) {
       return null
@@ -60,6 +84,16 @@ class GameDetail extends PureComponent {
         <Panel bsStyle="primary">
           <Panel.Heading>Matches</Panel.Heading>
           <Panel.Body>
+            <FormGroup className='group-filter-checkboxes'>
+              { groupIds.length > 1 && groupIds.map((groupId) =>
+                <GroupCheckbox
+                  key={groupId}
+                  gameId={game.id}
+                  groupId={groupId}
+                  onClick={actions.updateGroupFilter}
+                />
+              )}
+            </FormGroup>
             <MatchCards matches={matches} />
           </Panel.Body>
         </Panel>
@@ -73,7 +107,8 @@ GameDetail.propTypes = {
   actions: PropTypes.object.isRequired,
   tournamentId: PropTypes.number.isRequired,
   game: PropTypes.object,
-  matches: PropTypes.array.isRequired
+  matches: PropTypes.array.isRequired,
+  groupIds: PropTypes.array.isRequired
 }
 
 GameDetail.defaultProps = {
@@ -83,12 +118,14 @@ GameDetail.defaultProps = {
 function mapStateToProps(state, props) {
   const gameId = Number(get(props, 'match.params.id'))
   const tournamentId = Number(get(props, 'match.params.tournamentId'))
+  const matches = selectMatchesForGame(state, props)
 
   return {
     tournamentId,
     gameId,
+    matches: selectFilteredMatchesForGame(state, props),
     game: selectGame(state, props),
-    matches: selectMatchesForGame(state, props)
+    groupIds: uniq(map(matches, 'group_id'))
   }
 }
 
@@ -98,7 +135,9 @@ function mapDispatchToProps(dispatch) {
       fetchGame,
       fetchMatchesForGame,
       fetchMatchCompetitorsForTournament,
-      fetchPlayers
+      fetchPlayers,
+      updateGroupFilter,
+      clearGroupFilter
     }, dispatch)
   }
 }
