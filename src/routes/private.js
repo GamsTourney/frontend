@@ -7,8 +7,7 @@ class PrivateRoute extends Component {
 
   render() {
     const { component: Component, ...rest } = this.props
-    // const hasPassword = this.props.password === process.env.ADMIN_PASSWORD
-    const hasPassword = true
+    const hasPassword = this.props.password === process.env.ADMIN_PASSWORD
 
     return (
       <Route {...rest} render={(props) => (
